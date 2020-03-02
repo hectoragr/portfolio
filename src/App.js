@@ -1,25 +1,45 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from 'react-router-dom';
+import Faq from './FAQ/FAQ';
+import HomePage from './HomePage/HomePage';
+import NavBar from './commons/NavBar';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+function Status({ code, children }) {
+  return (
+      <Route render={({ staticContext }) => {
+          if (staticContext) staticContext.status = code;
+          return children;
+      }} />
+  );
+}
+
+function FourOhFour() {
+  return (
+      <Status code={404}>
+          <h1>404</h1>
+      </Status>
+  );
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <NavBar/>
+      <Switch>
+        <Route path="/faq">
+          <Faq/>
+        </Route>
+        <Route path="/" exact={true}>
+          <HomePage/>
+        </Route>
+        <Route component={FourOhFour} />
+      </Switch>
+    </Router>
   );
 }
 
