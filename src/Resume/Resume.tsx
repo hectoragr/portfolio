@@ -31,6 +31,21 @@ const Resume: React.FC = () => {
         }
     };
 
+    const fromDate = (date: string) => {
+        const locale = i18n.language === 'es' ? 'es-ES' : 'en-US';
+        return new Date(date).toLocaleString(locale, { year: 'numeric', month: 'long' });
+    };
+
+    const toDate = (date: string) => {
+        const locale = i18n.language === 'es' ? 'es-ES' : 'en-US';
+        const dateObj = new Date(date);
+        if (dateObj.getTime() > Date.now()) {
+            return t('resume.present', 'Present');
+        }
+        return dateObj.toLocaleString(locale, { year: 'numeric', month: 'long' });
+    };  
+
+
     return (
         <div className="resume-container">
             <div className="resume-header">
@@ -43,7 +58,7 @@ const Resume: React.FC = () => {
                 <h3>{t('resume.workexptitle', 'Work Experience')}</h3>
                 {data[i18n.language === 'es' ? 'es' : 'en'].jobs.map((item, index) => (
                     <div key={index} className='work-item'>
-                        <h5><span className={getCompanyClassName(item.company)}>{item.company} @ {item.location};</span> {item.title} {t('resume.from', 'from')} {new Date(item.startDate).toLocaleString('en-US', { year: 'numeric', month: 'long'})} {t('resume.to', 'to')} {new Date(item.endDate).toLocaleString('en-US', { year: 'numeric', month: 'long'})}</h5>
+                        <h5><span className={getCompanyClassName(item.company)}>{item.company} @ {item.location};</span> {item.title} {t('resume.from', 'from')} {fromDate(item.startDate)} {t('resume.to', 'to')} {toDate(item.endDate)}</h5>
                         <p>{item.description}</p>
                         <ul>
                             {item.bullets.map((bullet, bulletIndex) => (

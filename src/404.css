@@ -1,0 +1,12 @@
+.four-oh-four {
+    min-height: 720px;
+    justify-content: center;
+    align-items: center;
+}
+
+.centered-content {
+    max-width: 960px;
+    width: 100%;
+    margin: 120px auto;
+    text-align: center;
+}

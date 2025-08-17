@@ -3,8 +3,16 @@
     "homepage": {
         "title": "¡Hola mundo!"
     },
+    "home": {
+        "title": "Inicio",
+        "welcome": "¡Bienvenido a mi página web!",
+        "description": "Este es mi sitio personal hecho en React con soporte para internacionalización.",
+        "contact": "Siéntete libre de navegar por esta página donde puedes encontrar mis redes sociales, currículum y otras cosas divertidas en la barra de navegación.",
+        "footer": "¡Gracias por visitar!",
+        "footerNote": "Esta página está en desarrollo, así que espera cambios y mejoras con el tiempo."
+    },
     "resume": {
-        "title": "Resume",
+        "title": "CV",
         "pronouns": "Él/Lo",
         "description": "Here is my resume.",
         "softwareEngineer": "Ingeniero de Software",
@@ -17,6 +25,14 @@
         "hobbies": "Pasatiempos",
         "languages": "Lenguajes",
         "interests": "Intereses",
-        "classOf": "Generación"
+        "classOf": "Generación",
+        "from": "de",
+        "to": "hasta",
+        "current": "Actual",
+        "present": "el presente"
+    },
+    "404": {
+        "p1": "La página que estás buscando no existe.",
+        "p2": "Verifica la URL o regresa a el"
     }
 }

@@ -6,25 +6,24 @@ import {
 } from 'react-router-dom';
 import Faq from './FAQ/FAQ';
 import HomePage from './HomePage/HomePage';
-import NavBar from './commons/NavBar';
 import Resume from './Resume/Resume';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './i18n'; // Importing i18n configuration
-
-function FourOhFour() {
-  return <h1>404</h1>;
-}
+import TopBar from './commons/TopBar';
+import Bottom from './commons/Bottom';
+import FourOhFour from './404';
 
 function App() {
   return (
     <Router>
-      <NavBar/>
+      <TopBar/>
       <Routes>
         <Route path="/faq" element={<Faq />} />
         <Route path="/resume" element={<Resume />} />
         <Route path="/" element={<HomePage />} />
         <Route path="*" element={<FourOhFour />} />
       </Routes>
+      <Bottom />
     </Router>
   );
 }
