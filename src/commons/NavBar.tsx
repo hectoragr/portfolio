@@ -2,8 +2,16 @@ import React from 'react';
 import {
     Link
 } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function NavBar() {
+
+    const { i18n } = useTranslation();
+
+    const changeLanguage = (lng: string) => {
+        i18n.changeLanguage(lng);
+    };
+
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <a className="navbar-brand" href=".">Navbar</a>
@@ -26,6 +34,16 @@ function NavBar() {
                     <li className="nav-item">
                         <Link className="nav-link" to="/resume">
                             Resume
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" to="#" onClick={() => changeLanguage('en')}>
+                            🇺🇸 EN
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" to="#" onClick={() => changeLanguage('es')}>
+                            🇲🇽 ES
                         </Link>
                     </li>
                 </ul>

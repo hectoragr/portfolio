@@ -1,5 +1,137 @@
 {
-    "jobs": [
+   "es": {
+     "jobs": [
+        {
+            "title": "Software Developer Engineer II",
+            "company": "Oracle America Inc.",
+            "location": "Seattle, WA (EUA)",
+            "startDate": "2019-04-19",
+            "endDate": "2025-10-13",
+            "description": "Me uní a Oracle Cloud Infrastructure como desarrollador full-stack, avanzando hacia convertirme en Ingeniero Front-end.",
+            "bullets": [
+                "Ayudé y co-lideré la expansión inicial del servicio Marketplace de OCI, siendo responsable de múltiples componentes en React.",
+                "Lideré el arranque inicial de la interfaz de Service Catalog de OCI, clonando desde Marketplace y en tiempo récord para cumplir con la puntuación de Gartner Cloud para cumplimientos gubernamentales.",
+                "Lideré la experiencia de registro para el Free-tier de OCI y el Portal de Activación de Cuentas en múltiples entornos y nubes privadas, incluyendo la responsabilidad de las pruebas de código UI de mi equipo. También ayudé a iniciar la interfaz de otro servicio para Gobernanza y trabajé en el equipo unificado de UI/UX."
+            ],
+            "skills": [
+                "Typescript",
+                "React",
+                "Redux",
+                "React Testing Library",
+                "A11y",
+                "Figma",
+                "DevOps",
+                "Selenium",
+                "BrowserStack",
+                "TeamCity",
+                "Postman",
+                "Tweak",
+                "Oracle Cloud Infrastructure",
+                "Terraform"
+            ]
+        },
+        {
+            "title": "Software Developer Engineer",
+            "company": "Amazon Web Services",
+            "location": "Seattle, WA (EUA)",
+            "startDate": "2017-03-27",
+            "endDate": "2018-12-01",
+            "description": "Nuestra misión es llevar el control y concretar los pagos y retenciones de impuestos para todo AWS Marketplace.",
+            "bullets": [
+                "Logré la automatización completa de los reportes fiscales desarrollando un nuevo servicio con Spring y Hibernate, subiendo el archivo encripatdo mensualmente al S3 de nuestros stakeholders.",
+                "Entregué nuevos microservicios en AWS Lambda y Step Functions para procesar todas las facturas de AWS Marketplace y reducir costos operativos.",
+                "Desarrollé y operé servicios utilizando pipelines de integración continua con métricas de CloudWatch, pruebas unitarias, de integración y de aceptación.",
+                "Desarrollé nuevas APIs para integrar los Servicios de Marketplace y mejorar cómo los clientes adquieren SaaS en el Marketplace."
+            ],
+            "skills": [
+                "Java",
+                "Spring Boot",
+                "AWS Lambda",
+                "Step Functions",
+                "Hibernate",
+                "CI/CD",
+                "CloudWatch",
+                "JUnit",
+                "Mockito",
+                "Cucumber"
+            ]
+        },
+        {
+            "title": "Software Design Engineer",
+            "company": "Intel Corporation",
+            "location": "Guadalajara, Jalisco (MX)",
+            "startDate": "2015-01-15",
+            "endDate": "2017-02-15",
+            "description": "Trabajé en la prioridad de Intel para habilitar la iniciativa \"Shift Left\" y reducir el Time to Market.",
+            "bullets": [
+                "Trabajé en la plataforma Simics para probar interfaces PCI-e y USB en nuevas arquitecturas.",
+                "Entregué una herramienta en Python para traducir Especificaciones Técnicas en XML a plantillas en C y reducir el tiempo de desarrollo."
+            ],
+            "skills": [
+                "Python",
+                "C",
+                "Simics",
+                "XML",
+                "PCI-e",
+                "USB",
+                "Agile",
+                "Scrum",
+                "Subversion"
+            ]
+        }
+    ],
+    "education": [
+        {            
+            "degree": "Ingeniería en Sistemas Digitales y Robótica",
+            "institution": "Tecnológico de Monterrey",
+            "location": "Monterrey, Nuevo León (MX)",
+            "startDate": "2007-08-01",
+            "endDate": "2013-12-01",
+            "description": "Cursé esta carrera para experimentar el stack completo de tecnología, desde hardware hasta software, y cómo interactúan entre sí."
+        }
+    ],
+    "other": {
+        "description": "Fuera del trabajo tengo una variedad de pasatiempos e intereses que me mantienen motivado y enfocado.",
+        "hobbies": [
+            "Viajar",
+            "Senderismo",
+            "Levantamiento de pesas",
+            "Ciclismo",
+            "Lectura",
+            "Cocinar"
+        ],
+        "languages": [
+            {
+                "name": "Español",
+                "level": "Nativo"
+            },
+            {
+                "name": "Inglés",
+                "level": "Competencia Profesional Completa"
+            },
+            {
+                "name": "Chino (Mandarín)",
+                "level": "Básico"
+            }
+        ],
+        "interests": [
+            "Tecnología",
+            "Veganismo",
+            "Debates teológicos",
+            "Conciencia sobre Artritis Reumatoide",
+            "Raspberry Pi",
+            "Magic the Gathering",
+            "Pokémon",
+            "Música",
+            "Historia",
+            "Ciencia Ficción",
+            "Libros y películas de terror",
+            "Tatuajes"
+        ]
+    }
+   }, 
+   "en": {
+     "jobs": [
         {
             "title": "Software Developer Engineer II",
             "company": "Oracle America Inc.",
@@ -128,4 +260,5 @@
             "Tattoos"
         ]
     }
+   }
 }

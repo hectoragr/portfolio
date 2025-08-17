@@ -5,8 +5,18 @@
     },
     "resume": {
         "title": "Resume",
+        "pronouns": "Él/Lo",
         "description": "Here is my resume.",
-        "softwareEngineer": "Ingeriero de Software",
-        "fulldetailstext": "Todos los detalles:"
+        "softwareEngineer": "Ingeniero de Software",
+        "fulldetailstext": "Todos los detalles:",
+        "workexptitle": "Experiencia Laboral",
+        "educationtitle": "Educación",
+        "outsideworktitle": "Fuera de la Oficina",
+        "skills": "Herramientas",
+        "technologies": "Tecnologías",
+        "hobbies": "Pasatiempos",
+        "languages": "Lenguajes",
+        "interests": "Intereses",
+        "classOf": "Generación"
     }
 }
