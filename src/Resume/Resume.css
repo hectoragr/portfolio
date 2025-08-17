@@ -1,0 +1,58 @@
+.resume-container {
+    max-width: fit-content;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+.resume-header {
+    text-align: center;
+}
+
+.resume-header p {
+    margin: 0 1em;
+}
+
+.resume-header sub {
+    font-size: 0.4em;
+    color: #666;
+}
+
+h3 {
+    text-align: center;
+    margin-top: 24px;
+}
+
+.work-experience {
+    margin: 24px 0;
+}   
+
+.work-experience div {
+    margin: 24px;
+}
+.oracle-span {
+    color: red;
+    font-weight: bold;
+}
+.amazon-span {
+    color: rgb(149, 149, 2);
+    font-weight: bold;
+}
+.intel-span {
+    color: blue;
+    font-weight: bold;
+}
+
+.skills-tag {
+    font-weight: bolder;;
+}
+
+.itesm-span {
+    color: green;
+    font-weight: bold;
+}
+
+@media print {
+    .navbar, .footer {
+        display: none !important;
+        font-size: 12px !important;
+    }
+}

@@ -1,0 +1,131 @@
+{
+    "jobs": [
+        {
+            "title": "Software Developer Engineer II",
+            "company": "Oracle America Inc.",
+            "location": "Seattle, WA (US)",
+            "startDate": "2019-04-19",
+            "endDate": "2025-10-13",
+            "description": "I joined Oracle Cloud Infrastructure as full-stack developer moving towards becoming a Front-end Engineer. ",
+            "bullets": [
+                "I helped and co-lead the initial expansion of OCI’s Marketplace service, being the owner of multiple React components.",
+                "Lead the initial bootstrap of OCI’s Service Catalog UI forking out of Marketplace, and in record time to comply with Gartner’s Cloud score for Gov compliance.",
+                "Lead the Sign-up experience to OCI Free-tier and Accounts Activation Portal across multiple enviorenments and private clouds, including owning my team’s UI code testing. Also helped bootstrap another services’s UI for Governance and working in the newly unified UI/UX team."
+            ],
+            "skills": [
+                "Typescript",
+                "React",
+                "Redux",
+                "React Testing Library",
+                "A11y",
+                "Figma",
+                "DevOps",
+                "Selenium",
+                "BrowserStack",
+                "TeamCity",
+                "Postman",
+                "Tweak",
+                "Oracle Cloud Infrastructure",
+                "Terraform"
+            ]
+        },
+        {
+            "title": "Software Developer Engineer",
+            "company": "Amazon Web Services",
+            "location": "Seattle, WA (US)",
+            "startDate": "2017-03-27",
+            "endDate": "2018-12-01",
+            "description": "Our mission is to keep track and bringing to completion the payments and tax retentions for all of AWS Marketplace.",
+            "bullets": [
+                "Accomplished full tax reporting automation by developing a new service using Spring and Hibernate and uploaded the encrypted file monthly to our stakeholders S3.",
+                "Delivered new micro-services on AWS Lambda and Step Functions to process all invoices for AWS Marketplace to reduce operational costs.",
+                "Developed and operated services using CI/CD pipelines with CloudWatch metrics, unit tests, integration test and acceptance tests.",
+                "Developed new APIs to integrate Marketplace Services to enhance how customer procure SaaS in the Marketplace."
+            ],
+            "skills": [
+                "Java",
+                "Spring Boot",
+                "AWS Lambda",
+                "Step Functions",
+                "Hibernate",
+                "CI/CD",
+                "CloudWatch",
+                "JUnit",
+                "Mockito",
+                "Cucumber"
+            ]
+        },
+        {
+            "title": "Software Design Engineer",
+            "company": "Intel Corporation",
+            "location": "Guadalajara, Jalisco (MX)",
+            "startDate": "2015-01-15",
+            "endDate": "2017-02-15",
+            "description": "Worked on Intel's priority to enable the \"Shift Left\" initiative to reduce Time to Market.",
+            "bullets": [
+                "Worked on Simics platform to test PCI-e and USB interfaces in new architectures.",
+                "Delivered a Python tool for translating XML Technical Specifications into C templates to reduce Development time."
+            ],
+            "skills": [
+                "Python",
+                "C",
+                "Simics",
+                "XML",
+                "PCI-e",
+                "USB",
+                "Agile",
+                "Scrum",
+                "Subversion"
+            ]
+        }
+    ],
+    "education": [
+        {            
+            "degree": "B.Sc. Digital Systems and Robotics Eng.",
+            "institution": "Tecnológico de Monterrey",
+            "location": "Monterrey, Nuevo León (MX)",
+            "startDate": "2007-08-01",
+            "endDate": "2013-12-01",
+            "description": "Coursed this deegree to experience the full stack of technology, from hardware to software, and how they interact with each other."
+        }
+    ],
+    "other": {
+        "description": "Outside of work I have a variety of hobbies and interests that keep me engaged and motivated.",
+        "hobbies": [
+            "Traveling",
+            "Hiking",
+            "Weight Lifting",
+            "Biking",
+            "Reading",
+            "Cooking"
+        ],
+        "languages": [
+            {
+                "name": "Spanish",
+                "level": "Native"
+            },
+            {
+                "name": "English",
+                "level": "Full Professional Proficiency"
+            },
+            {
+                "name": "Chinese (Mandarin)",
+                "level": "Elementary Proficiency"
+            }
+        ],
+        "interests": [
+            "Technology",
+            "Veganism",
+            "Teological Discussions",
+            "Rheumathod Arthritis awareness",
+            "Raspberry Pi",
+            "Magic the Gathering",
+            "Pokémon",
+            "Music",
+            "History",
+            "Science Fiction",
+            "Horror Books and Movies",
+            "Tattoos"
+        ]
+    }
+}

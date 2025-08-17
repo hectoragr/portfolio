@@ -1,0 +1,12 @@
+{
+    "welcome": "Bienvenido",
+    "homepage": {
+        "title": "¡Hola mundo!"
+    },
+    "resume": {
+        "title": "Resume",
+        "description": "Here is my resume.",
+        "softwareEngineer": "Ingeriero de Software",
+        "fulldetailstext": "Todos los detalles:"
+    }
+}
