@@ -4,9 +4,27 @@
     align-items: center;
 }
 
+.four-oh-four img {
+    width: 480px;
+    height: auto;
+}
+
 .centered-content {
     max-width: 960px;
     width: 100%;
     margin: 120px auto;
     text-align: center;
+}
+
+@media screen and (max-width: 800px) {
+    .four-oh-four img {
+        width: 100%;
+        height: auto;
+    }
+    
+    .centered-content {
+        margin: 0px;
+        padding: 24px;
+    }
+    
 }
