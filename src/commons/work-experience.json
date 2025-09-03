@@ -6,12 +6,13 @@
             "company": "Oracle America Inc.",
             "location": "Seattle, WA (EUA)",
             "startDate": "2019-04-19",
-            "endDate": "2025-10-13",
+            "endDate": "2025-09-30",
             "description": "Me uní a Oracle Cloud Infrastructure como desarrollador full-stack, avanzando hacia convertirme en Ingeniero Front-end.",
             "bullets": [
-                "Ayudé y co-lideré la expansión inicial del servicio Marketplace de OCI, siendo responsable de múltiples componentes en React.",
-                "Lideré el arranque inicial de la interfaz de Service Catalog de OCI, clonando desde Marketplace y en tiempo récord para cumplir con la puntuación de Gartner Cloud para cumplimientos gubernamentales.",
-                "Lideré la experiencia de registro para el Free-tier de OCI y el Portal de Activación de Cuentas en múltiples entornos y nubes privadas, incluyendo la responsabilidad de las pruebas de código UI de mi equipo. También ayudé a iniciar la interfaz de otro servicio para Gobernanza y trabajé en el equipo unificado de UI/UX."
+                "Co-lideré la expansión de OCI Marketplace, desarrollando componentes reutilizables en React adoptados por Service Catalog y contribuyendo al avance de OCI de Niche a Leader en Gartner.",
+                "Dirigí el desarrollo de los portales de Registro y Activación de Cuentas en React/Redux, optimizando la incorporación de miles de nuevos usuarios al mes.",
+                "Implementé Redwood UI en más de 30 nubes privadas, asegurando consistencia de diseño, accesibilidad y mayor cobertura de pruebas.",
+                "Apoyé iniciativas críticas en Service Catalog, Governance y modernización de UI, cumpliendo lanzamientos con plazos exigentes."
             ],
             "skills": [
                 "Typescript",
@@ -36,12 +37,12 @@
             "location": "Seattle, WA (EUA)",
             "startDate": "2017-03-27",
             "endDate": "2018-12-01",
-            "description": "Nuestra misión es llevar el control y concretar los pagos y retenciones de impuestos para todo AWS Marketplace.",
+            "description": "Equipo financiero de AWS Marketplace responsable de pagos y retenciones de impuestos.",
             "bullets": [
-                "Logré la automatización completa de los reportes fiscales desarrollando un nuevo servicio con Spring y Hibernate, subiendo el archivo encripatdo mensualmente al S3 de nuestros stakeholders.",
-                "Entregué nuevos microservicios en AWS Lambda y Step Functions para procesar todas las facturas de AWS Marketplace y reducir costos operativos.",
-                "Desarrollé y operé servicios utilizando pipelines de integración continua con métricas de CloudWatch, pruebas unitarias, de integración y de aceptación.",
-                "Desarrollé nuevas APIs para integrar los Servicios de Marketplace y mejorar cómo los clientes adquieren SaaS en el Marketplace."
+                "Automaticé la generación y entrega de reportes fiscales 1099-K con Lambdas/Step Functions, reduciendo el procesamiento de un día a minutos.",
+                "Migré servicios de un monolito a arquitectura distribuida con S3, colas y Step Functions para escalar operaciones financieras.",
+                "Desarrollé y operé servicios con pipelines CI/CD, métricas de CloudWatch y pruebas unitarias, de integración y aceptación.",
+                "Diseñé nuevas APIs para integrar servicios de Marketplace y mejorar la adquisición de SaaS."
             ],
             "skills": [
                 "Java",
@@ -65,7 +66,7 @@
             "description": "Trabajé en la prioridad de Intel para habilitar la iniciativa \"Shift Left\" y reducir el Time to Market.",
             "bullets": [
                 "Trabajé en la plataforma Simics para probar interfaces PCI-e y USB en nuevas arquitecturas.",
-                "Entregué una herramienta en Python para traducir Especificaciones Técnicas en XML a plantillas en C y reducir el tiempo de desarrollo."
+                "Entregué una herramienta en Python para traducir especificaciones técnicas en XML a plantillas en C, reduciendo el ciclo de desarrollo en 40%."
             ],
             "skills": [
                 "Python",
@@ -137,12 +138,13 @@
             "company": "Oracle America Inc.",
             "location": "Seattle, WA (US)",
             "startDate": "2019-04-19",
-            "endDate": "2025-10-13",
-            "description": "I joined Oracle Cloud Infrastructure as full-stack developer moving towards becoming a Front-end Engineer. ",
+            "endDate": "2025-09-30",
+            "description": "Front-end–focused engineer on Oracle Cloud Infrastructure (OCI).",
             "bullets": [
-                "I helped and co-lead the initial expansion of OCI’s Marketplace service, being the owner of multiple React components.",
-                "Lead the initial bootstrap of OCI’s Service Catalog UI forking out of Marketplace, and in record time to comply with Gartner’s Cloud score for Gov compliance.",
-                "Lead the Sign-up experience to OCI Free-tier and Accounts Activation Portal across multiple enviorenments and private clouds, including owning my team’s UI code testing. Also helped bootstrap another services’s UI for Governance and working in the newly unified UI/UX team."
+                "Co-led the expansion of OCI Marketplace, building reusable React components later integrated into Service Catalog, contributing to OCI’s rise from Niche → Leader in Gartner rankings.",
+                "Led development of OCI Sign-Up & Account Activation portals in React/Redux, streamlining onboarding for thousands of new users monthly.",
+                "Rolled out Redwood UI across 30+ private cloud deployments, ensuring design consistency, accessibility, and expanded test coverage.",
+                "Delivered on critical Service Catalog, Governance, and UI modernization projects, helping teams hit aggressive launch deadlines."
             ],
             "skills": [
                 "Typescript",
@@ -167,12 +169,12 @@
             "location": "Seattle, WA (US)",
             "startDate": "2017-03-27",
             "endDate": "2018-12-01",
-            "description": "Our mission is to keep track and bringing to completion the payments and tax retentions for all of AWS Marketplace.",
+            "description": "AWS Marketplace finance team responsible for payments and tax withholdings.",
             "bullets": [
-                "Accomplished full tax reporting automation by developing a new service using Spring and Hibernate and uploaded the encrypted file monthly to our stakeholders S3.",
-                "Delivered new micro-services on AWS Lambda and Step Functions to process all invoices for AWS Marketplace to reduce operational costs.",
-                "Developed and operated services using CI/CD pipelines with CloudWatch metrics, unit tests, integration test and acceptance tests.",
-                "Developed new APIs to integrate Marketplace Services to enhance how customer procure SaaS in the Marketplace."
+                "Automated 1099-K tax reporting pipeline via Lambdas/Step Functions, reducing processing time from 1 day to minutes.",
+                "Migrated services from a monolith to distributed systems with S3, queues, and Step Functions, improving scalability for financial operations.",
+                "Developed and operated services using CI/CD pipelines with CloudWatch metrics, unit tests, integration tests, and acceptance tests.",
+                "Built new APIs to integrate Marketplace services and improve how customers procure SaaS in the Marketplace."
             ],
             "skills": [
                 "Java",
@@ -196,7 +198,7 @@
             "description": "Worked on Intel's priority to enable the \"Shift Left\" initiative to reduce Time to Market.",
             "bullets": [
                 "Worked on Simics platform to test PCI-e and USB interfaces in new architectures.",
-                "Delivered a Python tool for translating XML Technical Specifications into C templates to reduce Development time."
+                "Delivered a Python tool converting XML technical specifications into C templates, cutting development cycle time by 40%."
             ],
             "skills": [
                 "Python",

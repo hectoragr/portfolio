@@ -51,7 +51,10 @@ h3 {
 }
 
 @media print {
-    .navbar, .footer {
+    html {
+        font-size: 65%;
+    }
+    .navbar, .footer, .outside-work{
         display: none !important;
         font-size: 12px !important;
     }
