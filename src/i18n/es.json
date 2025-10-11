@@ -9,7 +9,9 @@
         "description": "Este es mi sitio personal hecho en React con soporte para internacionalización.",
         "contact": "Siéntete libre de navegar por esta página donde puedes encontrar mis redes sociales, currículum y otras cosas divertidas en la barra de navegación.",
         "footer": "¡Gracias por visitar!",
-        "footerNote": "Esta página está en desarrollo, así que espera cambios y mejoras con el tiempo."
+        "footerNote": "Esta página está en desarrollo, así que espera cambios y mejoras con el tiempo.",
+        "chat": "Puedes chatear conmigo usando la función de Chat AI.",
+        "languageSwitch": "También puedes cambiar entre inglés y español usando los botones en la esquina superior derecha."
     },
     "resume": {
         "title": "CV",

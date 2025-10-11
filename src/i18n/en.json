@@ -9,7 +9,9 @@
         "description": "This is my personal website made in React with internationalization support.",
         "contact": "Feel free to navigate this page where you can find my socials, resume and other fun stuff in the navigation bar.",
         "footer": "Thank you for visiting!",
-        "footerNote": "This page is a work in progress, so expect changes and improvements over time."
+        "footerNote": "This page is a work in progress, so expect changes and improvements over time.",
+        "chat": "You can chat with me using the AI Chat feature.",
+        "languageSwitch": "You can also switch between English and Spanish using the buttons on the top right corner."
     },
     "resume": {
         "title": "Resume",

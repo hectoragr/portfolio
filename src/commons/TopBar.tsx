@@ -12,6 +12,8 @@ function TopBar() {
         localStorage.setItem('i18nextLng', lng);
     };
 
+    const chatUrl = window.location.href.includes("localhost") ? "http://localhost:5173" : "https://chat.hectorgomez.com";
+
 
     return (
         <Navbar bg="dark" data-bs-theme="dark" expand="lg">
@@ -23,6 +25,7 @@ function TopBar() {
                         <Nav.Link href="/">{t('home.title', 'Home')}</Nav.Link>
                         <Nav.Link href="/faq">Socials</Nav.Link>
                         <Nav.Link href="/resume">{t('resume.title', 'Resume')}</Nav.Link>
+                        <Nav.Link href={`${chatUrl}`}>AI Chat</Nav.Link>
                     </Nav>
                     <Nav className="ms-auto">
                         <Nav.Link href="#" onClick={() => changeLanguage('en')}>🇺🇸 EN</Nav.Link>

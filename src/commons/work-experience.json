@@ -9,10 +9,12 @@
             "endDate": "2025-09-30",
             "description": "Me uní a Oracle Cloud Infrastructure como desarrollador full-stack, avanzando hacia convertirme en Ingeniero Front-end.",
             "bullets": [
-                "Co-lideré la expansión de OCI Marketplace, desarrollando componentes reutilizables en React adoptados por Service Catalog y contribuyendo al avance de OCI de Niche a Leader en Gartner.",
-                "Dirigí el desarrollo de los portales de Registro y Activación de Cuentas en React/Redux, optimizando la incorporación de miles de nuevos usuarios al mes.",
-                "Implementé Redwood UI en más de 30 nubes privadas, asegurando consistencia de diseño, accesibilidad y mayor cobertura de pruebas.",
-                "Apoyé iniciativas críticas en Service Catalog, Governance y modernización de UI, cumpliendo lanzamientos con plazos exigentes."
+                "Impacté la posición de OCI en Garner para pasar de Niche a Lideres en Cloud al co-liderar la expansión del Marketplace Service, construyendo componentes reutilizables en React que luego se expandieron a Service Catalog, mejorando la clasificación de Garner.",
+                "Incrementé la cobertura de pruebas en un 60% para los portales de Registro y Activación de Cuentas de OCI en React/Redux, y optimicé la incorporación de miles de nuevos usuarios mensualmente.",
+                "Reduje el tiempo de construcción de la UI de Activación en una nueva región de una semana a un proceso de 2 horas.",
+                "Desplegué la UI de Activación en más de 30 nubes privadas, asegurando consistencia de diseño (Redwood), accesibilidad y mayor cobertura de pruebas.",
+                "Entregué proyectos de UI críticos relacionados a Catálogo de Servicios, Gobernanza y modernización de UI, ayudando a los equipos a cumplir con plazos de lanzamiento agresivos.",
+                "Tomé la batuta en las rotaciones de OnCall tanto para la UI como para los servicios de Backend consumidos. Fuí autor de 2 CAPAs."
             ],
             "skills": [
                 "Typescript",
@@ -39,10 +41,10 @@
             "endDate": "2018-12-01",
             "description": "Equipo financiero de AWS Marketplace responsable de pagos y retenciones de impuestos.",
             "bullets": [
-                "Automaticé la generación y entrega de reportes fiscales 1099-K con Lambdas/Step Functions, reduciendo el procesamiento de un día a minutos.",
-                "Migré servicios de un monolito a arquitectura distribuida con S3, colas y Step Functions para escalar operaciones financieras.",
-                "Desarrollé y operé servicios con pipelines CI/CD, métricas de CloudWatch y pruebas unitarias, de integración y aceptación.",
-                "Diseñé nuevas APIs para integrar servicios de Marketplace y mejorar la adquisición de SaaS."
+                "Reduje el tiempo de procesamiento de 1 día a minutos para generar el pipeline de informes fiscales 1099-K, mejoré la consulta SQL e integré el trabajo en CRON para entregarlo automáticamente a las partes interesadas.",
+                "Mejoré la escalabilidad y reduje costos al migrar servicios de un monolito a sistemas distribuidos con S3, Queues, Step Functions, lambdas y consultas SQL mejoradas.",
+                "Construí herramientas de pruebas de aceptación y estrés para aumentar la resiliencia operativa.",
+                "Tomé la responsabilidad de mis rotaciones de OnCall con rollbacks rápidos y análisis de causa raíz, autor de 1 COE."
             ],
             "skills": [
                 "Java",
@@ -65,8 +67,8 @@
             "endDate": "2017-02-15",
             "description": "Trabajé en la prioridad de Intel para habilitar la iniciativa \"Shift Left\" y reducir el Time to Market.",
             "bullets": [
-                "Trabajé en la plataforma Simics para probar interfaces PCI-e y USB en nuevas arquitecturas.",
-                "Entregué una herramienta en Python para traducir especificaciones técnicas en XML a plantillas en C, reduciendo el ciclo de desarrollo en 40%."
+                "Habilite la iniciativa de pruebas \"Shift Left\" de Intel, validando nuevas arquitecturas más temprano en el ciclo de vida.",
+                "Desarrollé un generador de Python/XML a C, reduciendo el tiempo de desarrollo en un 40% al generar los templates de bancos de memorias de dispositivos automáticamente."
             ],
             "skills": [
                 "Python",
@@ -141,10 +143,12 @@
             "endDate": "2025-09-30",
             "description": "Front-end–focused engineer on Oracle Cloud Infrastructure (OCI).",
             "bullets": [
-                "Co-led the expansion of OCI Marketplace, building reusable React components later integrated into Service Catalog, contributing to OCI’s rise from Niche → Leader in Gartner rankings.",
-                "Led development of OCI Sign-Up & Account Activation portals in React/Redux, streamlining onboarding for thousands of new users monthly.",
-                "Rolled out Redwood UI across 30+ private cloud deployments, ensuring design consistency, accessibility, and expanded test coverage.",
-                "Delivered on critical Service Catalog, Governance, and UI modernization projects, helping teams hit aggressive launch deadlines."
+                "Impacted the position of OCI in Garner to go from Niche to Leaders in Cloud by co-leading the expansion of the Marketplace Service, building React reusable components that were later expanded to Service Catalog which improved Garner ranking.",
+                "Increased test coverage by 60% for OCI Sign-Up & Account Activation portals in React/Redux, and streamlined onboarding for thousands of new users monthly.",
+                "Reduced building Activation UI in a new region from a week to a 2 hour process.",
+                "Rolled out Activation UI across 30+ private cloud deployments, ensuring design consistency (Redwood), accessibility, and expanded test coverage.",
+                "Delivered UI features on critical Service Catalog, Governance, and UI modernization projects, helping teams hit aggressive launch deadlines.",
+                "Owned OnCall rotations for both UI and the Backend services consumed. Authored 2 CAPAs."
             ],
             "skills": [
                 "Typescript",
@@ -171,10 +175,10 @@
             "endDate": "2018-12-01",
             "description": "AWS Marketplace finance team responsible for payments and tax withholdings.",
             "bullets": [
-                "Automated 1099-K tax reporting pipeline via Lambdas/Step Functions, reducing processing time from 1 day to minutes.",
-                "Migrated services from a monolith to distributed systems with S3, queues, and Step Functions, improving scalability for financial operations.",
-                "Developed and operated services using CI/CD pipelines with CloudWatch metrics, unit tests, integration tests, and acceptance tests.",
-                "Built new APIs to integrate Marketplace services and improve how customers procure SaaS in the Marketplace."
+                "Cut the processing time from 1 day to minutes to generate 1099-K tax reporting pipeline, improved the SQL query and integrated to CRON job to deliver automatically to stakeholders.",
+                "Improved scalability and reduced costs by migrating services from a monolith to distributed systems with S3, queues, Step Functions, lambdas and improved SQL queries.",
+                "Built acceptance & stress testing tools to boost operational resilience",
+                "Owned on-call rotations with rapid rollback and root-cause analysis, authored 1 COE."
             ],
             "skills": [
                 "Java",
@@ -197,8 +201,8 @@
             "endDate": "2017-02-15",
             "description": "Worked on Intel's priority to enable the \"Shift Left\" initiative to reduce Time to Market.",
             "bullets": [
-                "Worked on Simics platform to test PCI-e and USB interfaces in new architectures.",
-                "Delivered a Python tool converting XML technical specifications into C templates, cutting development cycle time by 40%."
+                "Enabled Intel’s “Shift Left” testing initiative, validating new architectures earlier in the lifecycle.",
+                "Developed Python/XML-to-C generator, reducing development cycle time by 40% to automatically generate device memory bank templates."
             ],
             "skills": [
                 "Python",
