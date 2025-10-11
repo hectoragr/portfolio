@@ -12,7 +12,7 @@ function TopBar() {
         localStorage.setItem('i18nextLng', lng);
     };
 
-    const chatUrl = window.location.href.includes("localhost") ? "http://localhost:5173" : "https://chat.hectorgomez.com";
+    const chatUrl = window.location.href.includes("localhost") ? "http://localhost:5173" : "https://chat.hectoragomez.com";
 
 
     return (
