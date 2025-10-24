@@ -5,7 +5,7 @@
     },
     "home": {
         "title": "Inicio",
-        "welcome": "¡Bienvenido a mi página web!",
+        "welcome": "¡Bienvenido a mi página web! Mi nombre es Elí Gómez",
         "description": "Este es mi sitio personal hecho en React con soporte para internacionalización.",
         "contact": "Siéntete libre de navegar por esta página donde puedes encontrar mis redes sociales, currículum y otras cosas divertidas en la barra de navegación.",
         "footer": "¡Gracias por visitar!",
