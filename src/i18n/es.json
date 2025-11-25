@@ -35,6 +35,7 @@
     },
     "404": {
         "p1": "La página que estás buscando no existe.",
-        "p2": "Verifica la URL o regresa a el"
+        "p2": "Verifica la URL o regresa a el",
+        "p3": "_"
     }
 }
