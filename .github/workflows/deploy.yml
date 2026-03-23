@@ -1,0 +1,61 @@
+name: Deploy to AWS
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  id-token: write  # Required for OIDC authentication
+  contents: read
+
+env:
+  AWS_REGION: us-east-1
+  S3_BUCKET: hectoragomez.com
+
+jobs:
+  deploy:
+    name: Build & Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+        env:
+          CI: false  # CRA treats warnings as errors when CI=true
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Sync build to S3
+        run: |
+          # Upload everything except index.html with long-lived cache headers
+          aws s3 sync build/ s3://${{ env.S3_BUCKET }} \
+            --delete \
+            --exclude "index.html" \
+            --cache-control "max-age=31536000,public,immutable"
+
+          # Upload index.html with no-cache so users always get the latest shell
+          aws s3 cp build/index.html s3://${{ env.S3_BUCKET }}/index.html \
+            --cache-control "no-cache,no-store,must-revalidate"
+
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --paths "/*"
