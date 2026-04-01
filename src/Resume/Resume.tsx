@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import '../i18n'; // Importing i18n configuration
 import { useTranslation } from 'react-i18next';
 import './Resume.css'; // Assuming you have some CSS for styling
@@ -48,6 +49,14 @@ const Resume: React.FC = () => {
 
     return (
         <div className="resume-container">
+            <Helmet>
+                <title>Resume | Héctor A. Gómez Reyes</title>
+                <meta name="description" content="Resume of Héctor A. Gómez Reyes — Software Engineer with experience at Oracle America, Amazon Web Services, and Intel. Skills include React, TypeScript, Java, Spring Boot, and AWS." />
+                <link rel="canonical" href="https://hectoragomez.com/resume" />
+                <meta property="og:url" content="https://hectoragomez.com/resume" />
+                <meta property="og:title" content="Resume | Héctor A. Gómez Reyes" />
+                <meta property="og:description" content="Software Engineer with experience at Oracle, AWS, and Intel. React, TypeScript, Java, Spring Boot, and cloud infrastructure." />
+            </Helmet>
             <div className="resume-header">
                 <h2>Héctor Alfonso Gómez Reyes<sub>({t('resume.pronouns', 'he/him')})</sub></h2>
                 <p>📍Seattle, WA. (US)</p>

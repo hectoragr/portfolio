@@ -4,6 +4,7 @@ import {
   Route,
   Routes
 } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import Faq from './FAQ/FAQ';
 import HomePage from './HomePage/HomePage';
 import Resume from './Resume/Resume';
@@ -15,16 +16,18 @@ import FourOhFour from './404';
 
 function App() {
   return (
-    <Router>
-      <TopBar/>
-      <Routes>
-        <Route path="/faq" element={<Faq />} />
-        <Route path="/resume" element={<Resume />} />
-        <Route path="/" element={<HomePage />} />
-        <Route path="*" element={<FourOhFour />} />
-      </Routes>
-      <Bottom />
-    </Router>
+    <HelmetProvider>
+      <Router>
+        <TopBar/>
+        <Routes>
+          <Route path="/faq" element={<Faq />} />
+          <Route path="/resume" element={<Resume />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="*" element={<FourOhFour />} />
+        </Routes>
+        <Bottom />
+      </Router>
+    </HelmetProvider>
   );
 }
 
