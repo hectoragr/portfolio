@@ -67,7 +67,7 @@ const Resume: React.FC = () => {
                 <h3>{t('resume.workexptitle', 'Work Experience')}</h3>
                 {data[i18n.language === 'es' ? 'es' : 'en'].jobs.map((item, index) => (
                     <div key={index} className='work-item'>
-                        <h5><span className={getCompanyClassName(item.company)}>{item.company} @ {item.location};</span> {item.title} {t('resume.from', 'from')} {fromDate(item.startDate)} {t('resume.to', 'to')} {toDate(item.endDate)}</h5>
+                        <h5><span className={getCompanyClassName(item.company)}>{item.company} @ {item.location};</span> {item.title} {t('resume.from', 'from')} {fromDate(item.startDate)} {t('resume.to', 'to')} {item.endDate ? toDate(item.endDate) : t('resume.present', 'Present')}</h5>
                         <p>{item.description}</p>
                         <ul>
                             {item.bullets.map((bullet, bulletIndex) => (

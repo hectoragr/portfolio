@@ -15,7 +15,7 @@ type Job = {
   company: string;
   location: string;
   startDate: string;
-  endDate: string;
+  endDate: string | null;
 };
 
 type SkillCategory = {
@@ -94,7 +94,7 @@ const HomePage: React.FC = () => {
               <div className={`timeline-item__dot${idx === 0 ? ' timeline-item__dot--active' : ''}`} />
               <div className="timeline-item__content">
                 <div className="timeline-item__period">
-                  {fromDate(job.startDate)} — {toDate(job.endDate)}
+                  {fromDate(job.startDate)} — {job.endDate ? toDate(job.endDate) : t('resume.present', 'Present')}
                 </div>
                 <div className="timeline-item__company">{job.company}</div>
                 <div className="timeline-item__title">{job.title}</div>

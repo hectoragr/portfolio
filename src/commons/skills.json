@@ -11,6 +11,11 @@
       "skills": ["Java", "Spring Boot", "Node.js", "Python", "AWS Lambda"]
     },
     {
+      "name": "AI",
+      "nameEs": "IA",
+      "skills": ["Kiro", "Claude Code", "Amazon Q", "AWS Bedrock", "Superpowers", "Skills", "Prompt Engineering"]
+    },
+    {
       "name": "Cloud & Infra",
       "nameEs": "Nube e Infra",
       "skills": ["AWS", "S3/CloudFront", "Terraform", "Step Functions", "Docker"]
