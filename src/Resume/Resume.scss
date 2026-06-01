@@ -1,0 +1,121 @@
+@use '../styles/variables' as *;
+
+.resume-container {
+  max-width: 900px;
+  padding: 20px;
+  color: $text-muted;
+}
+
+.resume-header {
+  text-align: center;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid $navy-light;
+
+  h2 {
+    color: $text-primary;
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+
+  sub {
+    font-size: 0.45em;
+    color: $text-dim;
+  }
+
+  p {
+    margin: 4px 0;
+    color: $text-muted;
+    font-size: 14px;
+  }
+
+  a {
+    color: $accent-red;
+    &:hover { color: lighten(#e94560, 15%); }
+  }
+}
+
+h3 {
+  color: $text-primary;
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 32px;
+  margin-bottom: 16px;
+  padding-left: 12px;
+  border-left: 4px solid $accent-red;
+  text-align: left;
+}
+
+.work-item,
+.education-item {
+  background: $navy-mid;
+  border: 1px solid $navy-border;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+
+  h5 {
+    color: $text-primary;
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 8px;
+  }
+
+  ul {
+    padding-left: 18px;
+    margin-bottom: 8px;
+
+    li {
+      font-size: 13px;
+      line-height: 1.6;
+      margin-bottom: 4px;
+    }
+  }
+}
+
+.oracle-span {
+  color: #e94560;
+  font-weight: bold;
+}
+
+.amazon-span {
+  color: #f90;
+  font-weight: bold;
+}
+
+.intel-span {
+  color: #0071c5;
+  font-weight: bold;
+}
+
+.itesm-span {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.udemy-span {
+  color: #a435f0;
+  font-weight: bold;
+}
+
+.skills-tag {
+  color: $accent-red;
+  font-weight: 700;
+}
+
+@media print {
+  html { font-size: 65%; }
+  .outside-work { display: none !important; }
+}
+
+@media screen and (min-width: 1200px) {
+  .resume-container {
+    width: 900px;
+    margin: auto;
+  }
+}

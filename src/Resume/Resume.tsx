@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import '../i18n'; // Importing i18n configuration
 import { useTranslation } from 'react-i18next';
-import './Resume.css'; // Assuming you have some CSS for styling
+import './Resume.scss';
 import data from '../commons/work-experience.json'
 
 const Resume: React.FC = () => {

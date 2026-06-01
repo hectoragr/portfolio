@@ -1,0 +1,135 @@
+@use '../styles/variables' as *;
+
+.home-page {
+  max-width: 720px;
+}
+
+.home-section {
+  margin-bottom: 40px;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  &__accent {
+    width: 4px;
+    height: 26px;
+    background: $accent-red;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  &__title {
+    color: $text-primary;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  &__bio {
+    color: $text-muted;
+    font-size: 15px;
+    line-height: 1.75;
+    margin: 0;
+  }
+}
+
+// Skills
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.skills-card {
+  background: $navy-mid;
+  border-radius: 8px;
+  padding: 14px 16px;
+  border: 1px solid $navy-border;
+
+  &__category {
+    color: $accent-red;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  &__tag {
+    background: $navy-light;
+    color: $text-primary;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+  }
+}
+
+// Experience timeline
+.experience-timeline {
+  position: relative;
+  padding-left: 22px;
+  border-left: 2px solid $navy-light;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 22px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &__dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: $navy-light;
+    border: 2px solid $text-dim;
+    position: absolute;
+    left: -28px;
+    top: 4px;
+
+    &--active {
+      background: $accent-red;
+      border-color: $accent-red;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__period {
+    color: $text-dim;
+    font-size: 11px;
+    margin-bottom: 3px;
+  }
+
+  &__company {
+    color: $text-primary;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  &__title {
+    color: $text-muted;
+    font-size: 13px;
+    margin-top: 2px;
+  }
+}
