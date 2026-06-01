@@ -84,6 +84,16 @@ const Sidebar: React.FC<SidebarProps> = ({ onNavClick }) => {
             {item.label}
           </NavLink>
         ))}
+        <a
+          href="https://chat.hectoragomez.com"
+          target="_blank"
+          rel="noreferrer"
+          className="sidebar__nav-item"
+          onClick={onNavClick}
+        >
+          <span className="sidebar__nav-icon">🤖</span>
+          {t('nav.chat', 'AI Chat')}
+        </a>
       </nav>
 
       <div className="sidebar__divider" />
