@@ -1,0 +1,24 @@
+{
+  "categories": [
+    {
+      "name": "Frontend",
+      "nameEs": "Frontend",
+      "skills": ["React", "TypeScript", "Redux", "HTML/CSS", "A11y"]
+    },
+    {
+      "name": "Backend",
+      "nameEs": "Backend",
+      "skills": ["Java", "Spring Boot", "Node.js", "Python", "AWS Lambda"]
+    },
+    {
+      "name": "Cloud & Infra",
+      "nameEs": "Nube e Infra",
+      "skills": ["AWS", "S3/CloudFront", "Terraform", "Step Functions", "Docker"]
+    },
+    {
+      "name": "Tools",
+      "nameEs": "Herramientas",
+      "skills": ["Git", "Linux", "Figma", "TeamCity", "Postman"]
+    }
+  ]
+}

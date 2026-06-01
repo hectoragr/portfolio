@@ -28,3 +28,6 @@ infrastructure/.terraform.lock.hcl
 infrastructure/terraform.tfstate
 infrastructure/terraform.tfstate.backup
 infrastructure/*.tfvars
+
+# brainstorming visual companion
+.superpowers/

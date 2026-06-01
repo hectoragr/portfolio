@@ -5,13 +5,15 @@
     },
     "home": {
         "title": "Inicio",
-        "welcome": "¡Bienvenido a mi página web!",
-        "description": "Este es mi sitio personal hecho en React con soporte para internacionalización.",
-        "contact": "Siéntete libre de navegar por esta página donde puedes encontrar mis redes sociales, currículum y otras cosas divertidas en la barra de navegación.",
-        "footer": "¡Gracias por visitar!",
-        "footerNote": "Esta página está en desarrollo, así que espera cambios y mejoras con el tiempo.",
-        "chat": "Puedes chatear conmigo usando la función de Chat AI.",
-        "languageSwitch": "También puedes cambiar entre inglés y español usando los botones en la esquina superior derecha."
+        "bio": "Ingeniero de Software con experiencia construyendo sistemas en producción en Oracle Cloud Infrastructure, Amazon Web Services e Intel. Me especializo en React, TypeScript e infraestructura en la nube — convirtiendo requerimientos complejos en software confiable y mantenible.",
+        "aboutTitle": "Sobre Mí",
+        "skillsTitle": "Habilidades",
+        "experienceTitle": "Experiencia"
+    },
+    "nav": {
+        "home": "Inicio",
+        "resume": "CV",
+        "faq": "Redes Sociales"
     },
     "resume": {
         "title": "CV",

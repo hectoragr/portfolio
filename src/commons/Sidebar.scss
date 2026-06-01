@@ -1,0 +1,172 @@
+@use '../styles/variables' as *;
+
+.sidebar {
+  width: 280px;
+  min-height: 100vh;
+  background: $navy-deep;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid $navy-border;
+}
+
+// Profile section
+.sidebar__profile {
+  background: linear-gradient(160deg, $navy-light 0%, $navy-deep 100%);
+  padding: 32px 20px 24px;
+  text-align: center;
+}
+
+.sidebar__photo-ring {
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  border: 3px solid $accent-red;
+  margin: 0 auto 14px;
+  overflow: hidden;
+  background: $navy-light;
+}
+
+.sidebar__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.sidebar__name {
+  color: $text-primary;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  margin: 0 0 6px;
+}
+
+.sidebar__title {
+  color: $accent-red;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin: 0;
+  font-weight: 500;
+}
+
+// Dividers
+.sidebar__divider {
+  height: 1px;
+  background: $navy-light;
+  margin: 0 20px;
+
+  &--red {
+    background: linear-gradient(to right, transparent, $accent-red, transparent);
+  }
+}
+
+// Social icons
+.sidebar__socials {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 20px;
+}
+
+.sidebar__social-btn {
+  width: 36px;
+  height: 36px;
+  background: $navy-light;
+  border: 1px solid $navy-border;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $text-muted;
+  font-size: 12px;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+
+  &:hover {
+    background: $accent-red;
+    color: #fff;
+    border-color: $accent-red;
+  }
+}
+
+// Navigation
+.sidebar__nav {
+  padding: 16px 16px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar__nav-label {
+  display: block;
+  color: $text-dim;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+  padding-left: 4px;
+}
+
+.sidebar__nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 7px;
+  color: $text-muted;
+  font-size: 13px;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+
+  &:hover {
+    background: $navy-light;
+    color: $text-primary;
+  }
+
+  &--active {
+    background: $accent-red;
+    color: #fff;
+
+    &:hover {
+      background: #c73652;
+      color: #fff;
+    }
+  }
+}
+
+.sidebar__nav-icon {
+  font-size: 15px;
+  line-height: 1;
+}
+
+// Language toggle
+.sidebar__lang {
+  display: flex;
+  gap: 8px;
+  padding: 16px 20px 24px;
+}
+
+.sidebar__lang-btn {
+  flex: 1;
+  padding: 7px;
+  border-radius: 5px;
+  border: 1px solid $navy-border;
+  background: $navy-light;
+  color: $text-muted;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+
+  &--active {
+    background: $accent-red;
+    color: #fff;
+    border-color: $accent-red;
+  }
+
+  &:hover:not(&--active) {
+    background: $navy-border;
+    color: $text-primary;
+  }
+}
