@@ -13,7 +13,8 @@
     "nav": {
         "home": "Inicio",
         "resume": "CV",
-        "faq": "Redes Sociales"
+        "faq": "Redes Sociales",
+        "chat": "Chat IA"
     },
     "resume": {
         "title": "CV",

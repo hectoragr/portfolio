@@ -13,7 +13,8 @@
     "nav": {
         "home": "Home",
         "resume": "Resume",
-        "faq": "Socials"
+        "faq": "Socials",
+        "chat": "AI Chat"
     },
     "resume": {
         "title": "Resume",

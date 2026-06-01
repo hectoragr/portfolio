@@ -2,6 +2,32 @@
    "es": {
      "jobs": [
         {
+            "title": "Front End Engineer II",
+            "company": "Amazon Leo (a través de INSPYR Solutions)",
+            "location": "Redmond, WA (EUA)",
+            "startDate": "2026-03-31",
+            "endDate": null,
+            "description": "Ingeniero front-end trabajando para Amazon Leo (anteriormente Amazon Kuiper) como contratista para INSPYR Solutions.",
+            "bullets": [
+                "Desarrollo guiado por especificaciones con Kiro",
+                "React y RTL para los paneles de salud de satélites",
+                "Actualización de páginas Next JS migrando a Lambdas desde AppSync",
+                "Desarrollo impulsado por IA utilizando herramientas como Kiro, Claude Code, Amazon Q y otras herramientas internas con modelos AWS Bedrock para acelerar el desarrollo.",
+                "Desarrollo de habilidades para mantener los repositorios actualizados con las mejores prácticas y mejorar continuamente la calidad y mantenibilidad del código."
+            ],
+            "skills": [
+                "Typescript",
+                "React",
+                "Redux",
+                "React Testing Library",
+                "Kiro",
+                "Desarrollo guiado por especificaciones",
+                "Desarrollo impulsado por IA",
+                "Cypress",
+                "AWS"
+            ]
+        },
+        {
             "title": "Software Developer Engineer II",
             "company": "Oracle America Inc.",
             "location": "Seattle, WA (EUA)",
@@ -135,6 +161,32 @@
    }, 
    "en": {
      "jobs": [
+        {
+            "title": "Front End Engineer II",
+            "company": "Amazon Leo (through INSPYR Solutions)",
+            "location": "Redmond, WA (US)",
+            "startDate": "2026-03-31",
+            "endDate": null,
+            "description": "Front-end engineer working for Amazon Leo (formely Amazon Kuiper) as a contractor for INSPYR Solutions.",
+            "bullets": [
+                "Spec driven development with Kiro",
+                "React and RTL for Satellite Health Dashboards",
+                "Updating Next JS pages migrating to Lambdas from AppSync",
+                "AI driven development using tools like Kiro, Claude Code, Amazon Q, and other internal tools with AWS Bedrock models to speed up development.",
+                "Skill development to keep repositories up to date with best practices and continously improve code quality and maintainability."
+            ],
+            "skills": [
+                "Typescript",
+                "React",
+                "Redux",
+                "React Testing Library",
+                "Kiro",
+                "Spec Driven Development",
+                "AI Driven Development",
+                "Cypress",
+                "AWS"
+            ]
+        },
         {
             "title": "Software Developer Engineer II",
             "company": "Oracle America Inc.",

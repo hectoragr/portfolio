@@ -16,6 +16,14 @@ describe('Sidebar', () => {
     expect(screen.getByText('Home')).toBeInTheDocument();
     expect(screen.getByText('Resume')).toBeInTheDocument();
     expect(screen.getByText('Socials')).toBeInTheDocument();
+    expect(screen.getByText('AI Chat')).toBeInTheDocument();
+  });
+
+  it('AI Chat link opens chat.hectoragomez.com in new tab', () => {
+    render(<MemoryRouter><Sidebar onNavClick={() => {}} /></MemoryRouter>);
+    const chatLink = screen.getByText('AI Chat').closest('a')!;
+    expect(chatLink).toHaveAttribute('href', 'https://chat.hectoragomez.com');
+    expect(chatLink).toHaveAttribute('target', '_blank');
   });
 
   it('calls changeLanguage when EN button clicked', () => {
