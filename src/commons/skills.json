@@ -3,7 +3,7 @@
     {
       "name": "Frontend",
       "nameEs": "Frontend",
-      "skills": ["React", "TypeScript", "Redux", "HTML/CSS", "A11y"]
+      "skills": ["React", "TypeScript", "Redux", "Next.js", "RTL", "Cypress", "A11y"]
     },
     {
       "name": "Backend",
@@ -13,12 +13,12 @@
     {
       "name": "AI",
       "nameEs": "IA",
-      "skills": ["Kiro", "Claude Code", "Amazon Q", "AWS Bedrock", "Superpowers", "Skills", "Prompt Engineering"]
+      "skills": ["Kiro", "Claude Code", "Amazon Q", "AWS Bedrock", "Spec Driven Dev", "Prompt Engineering"]
     },
     {
       "name": "Cloud & Infra",
       "nameEs": "Nube e Infra",
-      "skills": ["AWS", "S3/CloudFront", "Terraform", "Step Functions", "Docker"]
+      "skills": ["AWS", "S3/CloudFront", "Terraform", "Step Functions", "Docker", "CI/CD"]
     },
     {
       "name": "Tools",

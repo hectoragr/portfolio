@@ -167,13 +167,13 @@
             "location": "Redmond, WA (US)",
             "startDate": "2026-03-31",
             "endDate": null,
-            "description": "Front-end engineer working for Amazon Leo (formely Amazon Kuiper) as a contractor for INSPYR Solutions.",
+            "description": "Front-end engineer working for Amazon Leo (formerly Amazon Kuiper) as a contractor for INSPYR Solutions.",
             "bullets": [
                 "Spec driven development with Kiro",
                 "React and RTL for Satellite Health Dashboards",
                 "Updating Next JS pages migrating to Lambdas from AppSync",
                 "AI driven development using tools like Kiro, Claude Code, Amazon Q, and other internal tools with AWS Bedrock models to speed up development.",
-                "Skill development to keep repositories up to date with best practices and continously improve code quality and maintainability."
+                "Skill development to keep repositories up to date with best practices and continuously improve code quality and maintainability."
             ],
             "skills": [
                 "Typescript",
@@ -276,7 +276,7 @@
             "location": "Monterrey, Nuevo León (MX)",
             "startDate": "2007-08-01",
             "endDate": "2013-12-01",
-            "description": "Coursed this deegree to experience the full stack of technology, from hardware to software, and how they interact with each other."
+            "description": "Coursed this degree to experience the full stack of technology, from hardware to software, and how they interact with each other."
         }
     ],
     "other": {
@@ -306,8 +306,8 @@
         "interests": [
             "Technology",
             "Veganism",
-            "Teological Discussions",
-            "Rheumathod Arthritis awareness",
+            "Theological Discussions",
+            "Rheumatoid Arthritis awareness",
             "Raspberry Pi",
             "Magic the Gathering",
             "Pokémon",
