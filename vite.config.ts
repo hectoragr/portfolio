@@ -17,6 +17,12 @@ export default defineConfig({
     outDir: 'build',
   },
   publicDir: 'public',
+  css: {
+    preprocessorOptions: {
+      // Opt in to the modern Sass compiler API; the legacy one is removed in Dart Sass 2.0
+      scss: { api: 'modern-compiler' },
+    },
+  },
   optimizeDeps: {
     esbuildOptions: {
       loader: {
