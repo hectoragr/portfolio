@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+# npm is the package manager of record; a yarn.lock here would drift silently
+yarn.lock
+
 # testing
 /coverage
 
@@ -25,9 +28,10 @@ yarn-error.log*
 # Terraform
 infrastructure/.terraform/
 infrastructure/.terraform.lock.hcl
-infrastructure/terraform.tfstate
-infrastructure/terraform.tfstate.backup
+# Covers terraform.tfstate, terraform.tfstate.backup and terraform.tfstate.<epoch>.backup
+infrastructure/terraform.tfstate*
 infrastructure/*.tfvars
+infrastructure/tfplan
 
 # brainstorming visual companion
 .superpowers/

@@ -1,68 +1,70 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# hectoragomez.com
 
-## Available Scripts
+Personal portfolio site of Héctor A. Gómez Reyes — a static React single-page app
+deployed to AWS S3 + CloudFront.
 
-In the project directory, you can run:
+**Live:** https://hectoragomez.com
 
-### `npm start`
+---
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Stack
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+React 19 · TypeScript 5 · React Router 7 · react-i18next (EN/ES) · Bootstrap 5 · Sass
+· Vite 5 · Vitest + React Testing Library · Terraform · GitHub Actions
 
-### `npm test`
+## Quick start
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Requires Node 22 (see `.nvmrc`).
 
-### `npm run build`
+```bash
+npm ci        # install
+npm start     # dev server → http://localhost:5173
+```
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Scripts
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+| Script | Does |
+|---|---|
+| `npm start` | Vite dev server with HMR on port 5173 |
+| `npm run build` | Production bundle into `build/` |
+| `npm run preview` | Serve the built output locally |
+| `npm test` | Vitest, single run |
+| `npm run test:watch` | Vitest in watch mode |
+| `npm run typecheck` | `tsc --noEmit` |
+| `npm run verify` | typecheck + test + build — run this before committing |
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Layout
 
-### `npm run eject`
+```
+index.html            Vite entry: static SEO meta + JSON-LD
+src/
+  index.js            React root
+  App.tsx             Providers + routes
+  commons/            AppShell, Sidebar, and the resume/skills JSON data
+  HomePage/ Resume/ FAQ/   Pages, each with a co-located .scss
+  i18n/               English + Spanish strings
+  styles/             SCSS design tokens
+  config/personal.ts  Name, links, photo
+public/               Copied verbatim into build/ (favicon, sitemap, robots, images)
+infrastructure/       Terraform: S3, CloudFront, Route 53, ACM, GitHub OIDC
+.github/workflows/    Build, verify, and deploy on push to master
+docs/workflows/       Task playbooks
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Deployment
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Pushing to `master` runs `.github/workflows/deploy.yml`, which typechecks, tests, builds,
+syncs `build/` to S3, and invalidates CloudFront. AWS access uses GitHub OIDC — there are no
+static credentials. **A push to `master` is a production release.**
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Contributing / working on this repo
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+All engineering knowledge — architecture, data contracts, deploy details, infrastructure,
+and task playbooks — lives in **[`AGENTS.md`](./AGENTS.md)**. Read that first.
 
-## Learn More
+AI coding agents pick it up automatically: `CLAUDE.md`, `GEMINI.md`, `QWEN.md`, and
+`.kiro/steering/` are thin pointers to the same file.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## License
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+GPL-3.0 — see [`LICENSE`](./LICENSE).
