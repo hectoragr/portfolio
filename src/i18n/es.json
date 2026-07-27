@@ -34,7 +34,8 @@
         "from": "de",
         "to": "hasta",
         "current": "Actual",
-        "present": "el presente"
+        "present": "el presente",
+        "downloadBtn": "Descargar / Imprimir"
     },
     "404": {
         "p1": "La página que estás buscando no existe.",

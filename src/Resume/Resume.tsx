@@ -11,6 +11,8 @@ const Resume: React.FC = () => {
     const getCompanyClassName = (company: string) => {
         switch (company) {
             case 'Amazon Web Services':
+            case 'Amazon Leo (through INSPYR Solutions)':
+            case 'Amazon Leo (a través de INSPYR Solutions)':
                 return 'amazon-span';
             case 'Oracle America Inc.':
                 return 'oracle-span';
@@ -62,6 +64,13 @@ const Resume: React.FC = () => {
                 <p>📍Seattle, WA. (US)</p>
                 <p>{t('resume.softwareEngineer', 'Software Engineer')}</p>
                 <p>{t('resume.fulldetailstext')} @ <a href='https://www.linkedin.com/in/hagomezr' target='_blank' rel='noreferrer'>LinkedIn</a></p>
+                <button
+                    className="resume-download-btn"
+                    onClick={() => window.print()}
+                    type="button"
+                >
+                    🖨️ {t('resume.downloadBtn', 'Download / Print')}
+                </button>
             </div>
             <div className='work-experience'>
                 <h3>{t('resume.workexptitle', 'Work Experience')}</h3>

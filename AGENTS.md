@@ -85,7 +85,7 @@ All commands run from the repo root. Timings measured on Linux, Node 22.22.0, np
 | `npm ci` | Clean install, exactly matches CI | ✅ **~2 min cold** |
 | `npm start` | Vite dev server + HMR | ✅ **http://localhost:5173** — *not* 3000 |
 | `npm run build` | Production bundle → `build/` | ✅ 84 modules, **~2.5 s** |
-| `npm test` | Vitest, single run | ✅ **3 files / 13 tests**, ~2.3 s |
+| `npm test` | Vitest, single run | ✅ **4 files / 17 tests**, ~2.3 s |
 | `npm run test:watch` | Vitest watch mode | ✅ |
 | `npm run typecheck` | `tsc --noEmit` | ✅ clean |
 | `npm run preview` | Serve the built `build/` locally | ✅ |
@@ -133,6 +133,11 @@ up. Don't reintroduce it to paper over a conflict — fix the conflict.
 **Cross-platform.** All scripts are plain `vite`/`vitest`/`tsc` invocations with no shell built-ins, so
 they work identically on Linux, macOS, and Windows (PowerShell or cmd). `cross-env` is already a
 dependency if you ever need to set env vars in a script.
+
+**Agent tool constraints.** Long-running commands (e.g., `npm ci` on cold cache) may time out or have
+their output truncated in AI IDE terminals. Prefer `npm run build` (fast, ~2.5 s) for verification over
+`npm ci` when packages are already installed. When terminal output is truncated, the command still
+ran — check the exit code, not the output completeness.
 
 ---
 
@@ -269,6 +274,8 @@ same number of jobs, same order — because `HomePage` and `Resume` index by pos
 | `company` value (exact string) | class |
 |---|---|
 | `Amazon Web Services` | `amazon-span` |
+| `Amazon Leo (through INSPYR Solutions)` | `amazon-span` |
+| `Amazon Leo (a través de INSPYR Solutions)` | `amazon-span` |
 | `Oracle America Inc.` | `oracle-span` |
 | `Intel Corporation` | `intel-span` |
 | anything else | `default-company` |
@@ -284,11 +291,11 @@ design. If you want a brand color in Spanish too, add the Spanish string to the 
 ```
 
 Unlike work-experience, this is a **single list** with per-item `name`/`nameEs`.
-Current categories: Frontend, Backend, AI, Cloud & Infra, Tools.
+Current categories: Frontend, Backend, AI, Cloud & Infra, Tools. Max 7 skills per category.
 
 ### `src/i18n/{en,es}.json`
 
-32 keys each, grouped under `welcome`, `homepage`, `home`, `nav`, `resume`, `404`.
+33 keys each, grouped under `welcome`, `homepage`, `home`, `nav`, `resume`, `404`.
 Components call `t('key.path', 'English fallback')` — the fallback is what tests assert on, so keep it
 accurate. Both files must have **identical key sets**.
 
@@ -542,3 +549,4 @@ Append one row per commit that changes what agents need to know. Newest last.
 |---|---|---|
 | 2026-07-26 | *(initial)* | Initial `AGENTS.md` + pointer files + 6 playbooks. All commands, build/test output, deploy pipeline, secrets, Terraform layout, and 11 known issues verified by execution against `aee8d0e`. |
 | 2026-07-27 | *(this commit)* | All 11 original known issues closed. §4 rewritten around the new `npm run verify` gate; §9 pipeline now typechecks and tests before building; §8 and §5 updated for `.nvmrc` and `"type": "module"`; §2 documents `.kiro/steering/agents.md`. §13 replaced with 5 remaining issues, all newly verified. Deprecation warnings are now regressions, not noise. |
+| 2026-07-27 | *(this commit)* | resume-linkedin-sync feature: Download/Print button, print CSS (single-page), skills refresh, work-experience typo fixes, Resume.test.tsx (4 tests). §4 test count → 4/17, agent timeout lesson added. §6 updated for Amazon Leo mapping, 33 i18n keys, max-7-skills rule. |

@@ -69,3 +69,19 @@
     padding: 60px 20px 20px;
   }
 }
+
+@media print {
+  .sidebar-wrapper { display: none !important; }
+  .hamburger { display: none !important; }
+  .sidebar-overlay { display: none !important; }
+
+  .main-content {
+    padding: 0;
+    width: 100%;
+  }
+
+  .app-shell {
+    display: block;
+    background: #fff;
+  }
+}
