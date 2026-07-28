@@ -1,0 +1,23 @@
+// CloudWatch Synthetics canary — rendered by templatefile() in monitoring.tf.
+// Loads the live site in headless Chromium and fails the run unless the page
+// returns < 400 AND React mounts (#main-content is rendered by AppShell.tsx,
+// so a 200 serving a blank SPA shell still fails).
+// Runtime syn-nodejs-puppeteer-13.1+ uses the @aws/synthetics-puppeteer
+// namespace; the legacy require('Synthetics') is deprecated.
+const synthetics = require('@aws/synthetics-puppeteer');
+
+const checkSiteUp = async function () {
+  const url = 'https://${domain_name}/';
+  const page = await synthetics.getPage();
+  const response = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
+  if (!response || response.status() >= 400) {
+    const status = response ? response.status() : 'no response';
+    throw new Error('Failed to load ' + url + ' - status: ' + status);
+  }
+  await page.waitForSelector('#main-content', { timeout: 15000 });
+  await synthetics.takeScreenshot('loaded', 'page rendered');
+};
+
+exports.handler = async () => {
+  return await checkSiteUp();
+};

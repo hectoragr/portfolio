@@ -6,6 +6,12 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 5.0"
     }
+
+    # Builds the Synthetics canary zip (monitoring.tf)
+    archive = {
+      source  = "hashicorp/archive"
+      version = "~> 2.0"
+    }
   }
 
   # Uncomment after creating the state bucket manually:

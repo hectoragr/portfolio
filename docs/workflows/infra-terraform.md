@@ -112,6 +112,56 @@ tracked until 2026-07-27 and have been untracked. Still check `git status` after
 - **`PriceClass_100`** limits edge locations to US/Canada/Europe. Visitors elsewhere see higher latency.
   That's a cost decision, not a bug.
 - **OIDC thumbprint** is pinned in `iam.tf`. If GitHub rotates it, OIDC auth fails with a TLS error.
+- **`monitoring.tf` adds the `hashicorp/archive` provider**, so `terraform init` must run again after
+  pulling it — `validate`/`plan` fail with "missing or corrupted provider plugins" otherwise.
+- **The SNS email subscription is not active until confirmed by hand.** After the first apply, AWS
+  emails `var.alert_email` a "Confirm subscription" link. Until someone clicks it the subscription
+  stays `PendingConfirmation` and **no alarm email is ever delivered** — the alarm still fires, it
+  just fans out to nobody. Terraform cannot confirm it for you and will show the resource as created
+  regardless, so this is silent. Check with:
+  ```bash
+  aws sns list-subscriptions-by-topic --topic-arn "$(terraform output -raw alerts_sns_topic_arn)"
+  ```
+  A real ARN in `SubscriptionArn` means confirmed; the literal string `PendingConfirmation` means not.
+
+---
+
+## Uptime monitoring (`monitoring.tf`)
+
+A Synthetics canary loads https://hectoragomez.com/ in headless Chromium every 4 hours and requires
+`#main-content` to render, so a 200 that serves a blank SPA still fails. A failed — or *missing* —
+run trips `portfolio-uptime-alarm`, which emails `var.alert_email` through SNS, and emails again on
+recovery.
+
+**First apply, in order:**
+
+1. `terraform init` (new `archive` provider), then the standard plan/apply above.
+2. **Click the confirmation link** in the SNS email — see the quirk above. Nothing works until this.
+3. Check the first run (the canary runs immediately on creation, then every 4 h):
+   ```bash
+   aws synthetics get-canary --name portfolio-uptime --query 'Canary.Status.State'   # RUNNING
+   aws synthetics get-canary-runs --name portfolio-uptime \
+     --query 'CanaryRuns[0].Status'                                                  # PASSED
+   ```
+4. Prove the email path end-to-end without touching the site:
+   ```bash
+   aws cloudwatch set-alarm-state --alarm-name portfolio-uptime-alarm \
+     --state-value ALARM --state-reason "manual test"
+   ```
+   Expect a "down" email within a minute, then a recovery email once the next real datapoint lands.
+
+**Failure triage.** Screenshots and HAR files for every run are in the
+`hectoragomez-canary-artifacts` bucket (30-day expiry); logs are in CloudWatch under
+`/aws/lambda/cwsyn-portfolio-uptime-*`. A canary failure with the site demonstrably up usually means
+the selector moved — `#main-content` comes from `src/commons/AppShell.tsx`. **If you rename that id,
+update `canary/canary.js.tftpl` in the same commit** or the canary starts crying wolf every 4 hours.
+
+**Runtime versions expire.** AWS deprecates Synthetics runtimes on a schedule; a canary left on a
+deprecated runtime eventually stops running (and `treat_missing_data = "breaching"` then pages you,
+which is the intended failure mode). Check with `aws synthetics describe-runtime-versions` and bump
+`runtime_version` in `monitoring.tf` — it is pinned deliberately, not left floating.
+
+**Cost** is roughly $0.30/month: 180 canary runs at $0.0012 each, plus negligible S3 and SNS.
 
 ---
 

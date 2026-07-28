@@ -35,7 +35,7 @@ resource "aws_cloudfront_distribution" "portfolio" {
 
     # Cache static assets for 1 year; deploy workflow invalidates on release
     min_ttl     = 0
-    default_ttl = 86400   # 1 day
+    default_ttl = 86400    # 1 day
     max_ttl     = 31536000 # 1 year
   }
 

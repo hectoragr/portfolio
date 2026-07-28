@@ -500,8 +500,9 @@ Full procedure incl. rollback: `docs/workflows/deploy-and-rollback.md`.
 
 ## 10. Infrastructure — `infrastructure/*.tf`
 
-Terraform `>= 1.5`, AWS provider `~> 5.0`. Two providers: default (`var.aws_region`) and an alias
-`aws.us_east_1` because **CloudFront requires its ACM certificate in us-east-1**.
+Terraform `>= 1.5`, AWS provider `~> 5.0`, plus `hashicorp/archive ~> 2.0` (builds the canary zip —
+adding it means `terraform init` must re-run). Two AWS provider configs: default (`var.aws_region`)
+and an alias `aws.us_east_1` because **CloudFront requires its ACM certificate in us-east-1**.
 
 | File | Resources |
 |---|---|
@@ -512,7 +513,8 @@ Terraform `>= 1.5`, AWS provider `~> 5.0`. Two providers: default (`var.aws_regi
 | `acm.tf` | DNS-validated cert (apex + `www`), Route 53 validation records, `create_before_destroy` |
 | `route53.tf` | Hosted zone (**must be imported**, not created — see the comment in the file) + A-alias records for apex and `www` |
 | `iam.tf` | GitHub OIDC provider + role `portfolio-github-actions-deploy`, trust scoped to `repo:hectoragr/portfolio:ref:refs/heads/master` only, policy = S3 CRUD + `cloudfront:CreateInvalidation` |
-| `outputs.tf` | `s3_bucket_name`, `cloudfront_domain`, `cloudfront_distribution_id`, `github_actions_role_arn`, `acm_certificate_arn` |
+| `monitoring.tf` | Uptime monitoring: Synthetics canary `portfolio-uptime` (headless Chromium, `rate(4 hours)`, runtime `syn-nodejs-puppeteer-16.1`) loads the site and requires `#main-content` to render; artifacts bucket `hectoragomez-canary-artifacts` (30-day expiry); alarm `portfolio-uptime-alarm` on `SuccessPercent < 100` with `treat_missing_data = breaching` → SNS `portfolio-alerts` → email `var.alert_email` (down + recovery). Script template: `canary/canary.js.tftpl`; zip built by `archive_file` into gitignored `canary.zip`. |
+| `outputs.tf` | `s3_bucket_name`, `cloudfront_domain`, `cloudfront_distribution_id`, `github_actions_role_arn`, `acm_certificate_arn`, `canary_name`, `alerts_sns_topic_arn` |
 
 ### SPA routing depends on CloudFront
 
@@ -547,20 +549,28 @@ Reusable, verified procedures. **Load only the one you need** — they are stand
 | [`docs/workflows/add-i18n-string.md`](docs/workflows/add-i18n-string.md) | Adding or changing any user-visible string |
 | [`docs/workflows/add-page-route.md`](docs/workflows/add-page-route.md) | Adding a new page, route, or sidebar nav entry |
 | [`docs/workflows/deploy-and-rollback.md`](docs/workflows/deploy-and-rollback.md) | Shipping, watching a deploy, or reverting a bad release |
-| [`docs/workflows/infra-terraform.md`](docs/workflows/infra-terraform.md) | Touching AWS: CloudFront, S3, DNS, certs, IAM |
+| [`docs/workflows/infra-terraform.md`](docs/workflows/infra-terraform.md) | Touching AWS: CloudFront, S3, DNS, certs, IAM, uptime monitoring |
 | [`docs/workflows/commit-audit.md`](docs/workflows/commit-audit.md) | **Every commit.** The knowledge-audit ritual. |
 
 ### Tool index
 
-| Tool | Used for | Check it's there |
-|---|---|---|
-| `npm` 10.9.4 / Node 22 | Everything JS | `node -v && npm -v` |
-| `gh` | Workflow runs, secrets, PRs | `gh auth status` |
-| `aws` CLI | Manual S3/CloudFront ops | `aws sts get-caller-identity` |
-| `terraform` >= 1.5 | Infrastructure | `terraform -version` |
-| `git` | VCS | — |
+| Tool | Used for | Check it's there | Status on this machine |
+|---|---|---|---|
+| `npm` 10.9.4 / Node 22 | Everything JS | `node -v && npm -v` | ✅ installed |
+| `gh` | Workflow runs, secrets, PRs | `gh auth status` | ✅ authenticated as `hectoragr` |
+| `git` | VCS | — | ✅ installed |
+| `aws` CLI | Manual S3/CloudFront ops, canary/alarm inspection | `aws sts get-caller-identity` | ❌ **not installed** |
+| `terraform` >= 1.5 | Infrastructure | `terraform -version` | ❌ **not installed** |
 
 `gh` is authenticated as `hectoragr`. Prefer `gh` over raw `curl` against the GitHub API.
+
+⚠️ **This is not the Terraform machine.** Verified 2026-07-27: there is no `aws` binary, no
+`terraform` binary, no `~/.aws/credentials` (only an SSO cache), and **no `terraform.tfstate`
+anywhere under `$HOME`**. Infrastructure code can be written, `validate`d, and `fmt`ted here — a
+throwaway Terraform binary is enough for that — but `plan` and `apply` must run wherever the state
+file actually lives. Applying from a machine without state is the exact scenario
+[`infra-terraform.md`](docs/workflows/infra-terraform.md) warns about: it can create a **duplicate
+Route 53 zone** and take DNS down. Don't do it.
 
 ### Historical design docs
 
@@ -660,6 +670,14 @@ currently reports **0 vulnerabilities**. What remains:
    static `build/index.html`. Google renders JS and will see it; simpler crawlers will not. Only the
    Person JSON-LD is in the static HTML.
 
+6. **`monitoring.tf` is written but has never been applied — the site is still unmonitored.** The
+   canary, alarm, SNS topic, and artifacts bucket exist only as code. They passed `terraform init`,
+   `validate`, and `fmt`, but `plan`/`apply` could not run here: this machine has no AWS CLI, no
+   Terraform, and no state file (§11). Nothing alerts on an outage until someone applies it from the
+   machine holding `terraform.tfstate` **and** confirms the SNS subscription email.
+   **Fix:** the "Uptime monitoring" section of
+   [`infra-terraform.md`](docs/workflows/infra-terraform.md).
+
 ---
 
 ## Knowledge ledger
@@ -673,3 +691,4 @@ Append one row per commit that changes what agents need to know. Newest last.
 | 2026-07-27 | *(this commit)* | resume-linkedin-sync feature: Download/Print button, print CSS (single-page), skills refresh, work-experience typo fixes, Resume.test.tsx (4 tests). §4 test count → 4/17, agent timeout lesson added. §6 updated for Amazon Leo mapping, 33 i18n keys, max-7-skills rule. |
 | 2026-07-27 | *(this commit)* | **`hectoragr/portfolio` and `hectoragr/chatbot-v2` are now public.** Both were secret-scanned across full history before the switch — no credentials found in either. §1 and §10 updated: the two `terraform.tfstate*.backup` blobs still in history are now world-readable, exposing infra identifiers (AWS account ID, role ARN, zone/distribution IDs) but no key material. `projects.json` links both repos as sources. |
 | 2026-07-27 | *(this commit)* | design-system-overhaul, tasks 1–11. **Vite 5→8 + Vitest 3→4**, entry point `index.js`→`index.tsx`, custom JSX plugin deleted, `@types/react-dom` added, tsconfig → es2020/bundler. **`react-router-dom` replaced by `react-router@8`** (only patched release for GHSA-qwww-vcr4-c8h2) which forced React → 19.2.8; `npm audit` now 0. **CSS custom property token system** (`_tokens.scss`) with dark/light themes + `ThemeContext` toggle. **Accessibility layer**: skip link, route announcer, focus-on-route-change, drawer focus trap, one `<h1>` per page, reduced-motion gating, `<article>` wrapper. **`/faq` → `/projects`** with `projects.json`; FAQ deleted. SEO: JSON-LD `worksFor`/`alumniOf` corrected, hreflang, sitemap `lastmod`. `autoprefixer` and 7 unused i18n keys removed; locales now 35/35 with verified parity. §4 build ~0.8 s / 18 tests, §5 rewritten, §6 gained projects.json, §13 rewritten (3 issues closed, 3 new findings recorded). |
+| 2026-07-27 | *(this commit)* | **Uptime monitoring added as code:** new `infrastructure/monitoring.tf` + `canary/canary.js.tftpl` — Synthetics canary every 4 h → CloudWatch alarm → SNS → email. New `alert_email` variable, `canary_name` / `alerts_sns_topic_arn` outputs, `hashicorp/archive` provider (**`terraform init` must re-run**). §10 gained a `monitoring.tf` row; `infra-terraform.md` gained an "Uptime monitoring" section documenting the two silent failure modes: an **unconfirmed SNS subscription delivers no email at all**, and renaming `#main-content` in `AppShell.tsx` breaks the canary. §11 **corrected** — it claimed `aws` and `terraform` were available; verified neither is installed here and no `terraform.tfstate` exists under `$HOME`, so this machine can validate infra but must never `apply`. New known issue #6: the stack is unapplied, so the site is still unmonitored. |

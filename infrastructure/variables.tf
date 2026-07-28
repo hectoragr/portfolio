@@ -10,6 +10,12 @@ variable "aws_region" {
   default     = "us-east-1"
 }
 
+variable "alert_email" {
+  description = "Email that receives uptime alarm notifications. The SNS subscription must be confirmed by clicking the link in the first email it sends."
+  type        = string
+  default     = "hector.agr@gmail.com" # already public in src/config/personal.ts
+}
+
 variable "github_repo" {
   description = "GitHub repository in org/repo format (used for OIDC trust policy)"
   type        = string
