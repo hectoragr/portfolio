@@ -401,8 +401,13 @@ and CI cannot drift.
 
 ## 9. Deploy pipeline — `.github/workflows/deploy.yml`
 
-**Trigger:** every push to `master`. There is no manual approval and no staging environment.
-**Push to `master` = production release.**
+**Triggers:** pull requests into `master` run `verify` only. Pushes to `master` run `verify` then
+`deploy`. There is no manual approval and no staging environment — **a merge to `master` is a
+production release.**
+
+Two jobs, and the split is deliberate:
+
+### Job 1 — `verify` (runs on PRs *and* on master)
 
 | Step | Detail |
 |---|---|
@@ -412,15 +417,36 @@ and CI cannot drift.
 | 4. Typecheck | `npm run typecheck` |
 | 5. Test | `npm test` |
 | 6. Build | `npm run build` |
-| 7. Auth | `aws-actions/configure-aws-credentials@v6` via **OIDC** — no static keys |
-| 8. Sync | `aws s3 sync build/ s3://hectoragomez.com --delete --exclude index.html --cache-control "max-age=31536000,public,immutable"` |
-| 9. Shell | `aws s3 cp build/index.html s3://hectoragomez.com/index.html --cache-control "no-cache,no-store,must-revalidate"` |
-| 10. Invalidate | `aws cloudfront create-invalidation --paths "/*"` |
+| 7. Upload | `actions/upload-artifact@v7`, name `build`, 1-day retention |
 
-Steps 4–6 are exactly what `npm run verify` runs locally, in the same order. A failure in any of them
-aborts before anything reaches S3.
+Steps 4–6 are exactly what `npm run verify` runs locally, in the same order, so a green local run
+predicts a green pipeline.
 
-**Permissions:** `id-token: write`, `contents: read`.
+### Job 2 — `deploy` (`needs: verify`, master pushes only)
+
+Guarded by `if: github.event_name == 'push' && github.ref == 'refs/heads/master'`.
+
+| Step | Detail |
+|---|---|
+| 1. Download | `actions/download-artifact@v8` → `build/` |
+| 2. Auth | `aws-actions/configure-aws-credentials@v6` via **OIDC** — no static keys |
+| 3. Sync | `aws s3 sync build/ s3://hectoragomez.com --delete --exclude index.html --cache-control "max-age=31536000,public,immutable"` |
+| 4. Shell | `aws s3 cp build/index.html s3://hectoragomez.com/index.html --cache-control "no-cache,no-store,must-revalidate"` |
+| 5. Invalidate | `aws cloudfront create-invalidation --paths "/*"` |
+
+**`deploy` never builds.** It ships the artifact `verify` produced, so the bytes that reach S3 are
+provably the bytes that passed the gate rather than the output of an untested second build. If you add
+a step that regenerates anything in `build/`, you have broken that guarantee.
+
+**Permissions are scoped per job.** The workflow default is `contents: read`; only `deploy` opts into
+`id-token: write`. This matters because **the repo is public** — anyone can open a PR and cause
+`verify` to run, and it must never hold a token that can reach AWS. Do not hoist `id-token` back up to
+the workflow level. (`iam.tf` is a second layer here: the role trust is scoped to
+`ref:refs/heads/master`, so a PR's OIDC subject cannot match regardless.)
+
+**Concurrency:** grouped per ref. Superseded PR runs are cancelled; master pushes are not, so two
+merges queue rather than racing each other's S3 sync.
+
 **Region:** `us-east-1`. **Bucket:** `hectoragomez.com`.
 
 **Action versions must target `node24`.** GitHub-hosted runners force Node 24, so any action still
@@ -442,12 +468,15 @@ built for Node 20 emits a deprecation warning annotation on every run. That is w
 
 Both come from `terraform output` (`github_actions_role_arn`, `cloudfront_distribution_id`).
 
-### The gate is real, but push is still the release
+### The gate now runs before the merge
 
-CI typechecks and tests before it builds, so a red suite can no longer reach production. What it
-**cannot** catch: content mistakes (the tests mock the JSON data), broken translations, and anything
-visual. There is no staging environment — `master` goes straight to the live domain. Run
-`npm run verify` and look at the page in a browser before you push.
+Pull requests get a `Verify` check, so a red suite is visible *before* anything lands on `master`. It
+still is not a staging environment. What CI **cannot** catch: content mistakes (the tests mock the JSON
+data), broken translations, and anything visual. `master` goes straight to the live domain, so run
+`npm run verify` and look at the page in a browser before opening the PR.
+
+There is no branch protection rule requiring the check to pass, so a red PR can still be merged by
+hand. If you want the gate enforced rather than advisory, add a required status check on `Verify`.
 
 ### Cache strategy, stated plainly
 
