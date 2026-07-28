@@ -1,8 +1,4 @@
 {
-    "welcome": "Bienvenido",
-    "homepage": {
-        "title": "¡Hola mundo!"
-    },
     "home": {
         "title": "Inicio",
         "bio": "Ingeniero de Software con experiencia construyendo sistemas en producción en Oracle Cloud Infrastructure, Amazon Web Services e Intel. Me especializo en React, TypeScript e infraestructura en la nube — convirtiendo requerimientos complejos en software confiable y mantenible.",
@@ -13,33 +9,43 @@
     "nav": {
         "home": "Inicio",
         "resume": "CV",
-        "faq": "Redes Sociales",
+        "projects": "Proyectos",
         "chat": "Chat IA"
     },
+    "projects": {
+        "title": "Proyectos",
+        "viewLive": "Ver en Vivo",
+        "viewSource": "Ver Código"
+    },
+    "theme": {
+        "toggleLight": "Cambiar a tema claro",
+        "toggleDark": "Cambiar a tema oscuro"
+    },
+    "a11y": {
+        "skipToContent": "Saltar al contenido principal",
+        "toggleMenu": "Alternar menú",
+        "navigationMenu": "Menú de navegación"
+    },
     "resume": {
-        "title": "CV",
         "pronouns": "Él/Lo",
-        "description": "Here is my resume.",
         "softwareEngineer": "Ingeniero de Software",
         "fulldetailstext": "Todos los detalles:",
         "workexptitle": "Experiencia Laboral",
         "educationtitle": "Educación",
         "outsideworktitle": "Fuera de la Oficina",
         "skills": "Herramientas",
-        "technologies": "Tecnologías",
         "hobbies": "Pasatiempos",
         "languages": "Lenguajes",
         "interests": "Intereses",
         "classOf": "Generación",
         "from": "de",
         "to": "hasta",
-        "current": "Actual",
         "present": "el presente",
         "downloadBtn": "Descargar / Imprimir"
     },
     "404": {
+        "title": "Página no encontrada",
         "p1": "La página que estás buscando no existe.",
-        "p2": "Verifica la URL o regresa a el",
-        "p3": "_"
+        "p2": "Verifica la URL o regresa a el"
     }
 }

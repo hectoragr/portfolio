@@ -1,0 +1,110 @@
+@use '../styles/variables' as *;
+
+.projects-page {
+  max-width: 900px;
+}
+
+.projects-page__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.projects-page__accent {
+  width: 4px;
+  height: 26px;
+  background: $accent-red;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.projects-page__title {
+  color: $text-primary;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  background: $navy-mid;
+  border: 1px solid $navy-border;
+  border-radius: 8px;
+  padding: 18px 20px;
+
+  &:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
+  }
+
+  // The lift is motion, so it is gated; the shadow above still gives a hover
+  // affordance when reduced motion is requested.
+  @media (prefers-reduced-motion: no-preference) {
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+
+  &__title {
+    color: $text-primary;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 8px;
+  }
+
+  &__description {
+    color: $text-muted;
+    font-size: 14px;
+    line-height: 1.65;
+    margin: 0 0 14px;
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+
+  &__tag {
+    background: $navy-light;
+    color: $text-primary;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+  }
+
+  // Pushes the link row to the bottom so cards of differing text length keep
+  // their actions aligned across the grid.
+  &__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: auto;
+  }
+
+  &__link {
+    color: $accent-red;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover {
+      color: $accent-red-hover;
+      text-decoration: underline;
+    }
+  }
+}

@@ -1,0 +1,27 @@
+@use '../styles/variables' as *;
+
+// Off-screen until focused, rather than display:none, so it stays in the tab
+// order and can be reached by keyboard.
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 300;
+  transform: translateY(-150%);
+  padding: 10px 16px;
+  background: $navy-light;
+  color: $text-primary;
+  border: 1px solid $accent-red;
+  border-radius: 0 0 6px 0;
+  font-size: 14px;
+  text-decoration: none;
+
+  &:focus {
+    transform: translateY(0);
+    color: $text-primary;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: transform 0.15s ease-in-out;
+  }
+}

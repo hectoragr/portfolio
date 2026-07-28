@@ -81,13 +81,22 @@
   color: $text-muted;
   font-size: 12px;
   text-decoration: none;
-  transition: background 0.15s, color 0.15s;
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: background 0.15s, color 0.15s;
+  }
 
   &:hover {
     background: $accent-red;
     color: #fff;
     border-color: $accent-red;
   }
+}
+
+.sidebar__social-icon {
+  width: 17px;
+  height: 17px;
+  display: block;
 }
 
 // Navigation
@@ -109,6 +118,7 @@
 }
 
 .sidebar__nav-item {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -117,7 +127,10 @@
   color: $text-muted;
   font-size: 13px;
   text-decoration: none;
-  transition: background 0.15s, color 0.15s;
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: background 0.15s, color 0.15s;
+  }
 
   &:hover {
     background: $navy-light;
@@ -128,9 +141,41 @@
     background: $accent-red;
     color: #fff;
 
+    // Indicator bar marking the current page.
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 3px;
+      height: 60%;
+      background: #fff;
+      border-radius: 0 2px 2px 0;
+      transform: translateY(-50%);
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      &::before {
+        animation: nav-indicator-in 0.2s ease-out;
+      }
+    }
+
     &:hover {
-      background: #c73652;
+      background: $accent-red-active;
       color: #fff;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes nav-indicator-in {
+    from {
+      opacity: 0;
+      height: 0;
+    }
+    to {
+      opacity: 1;
+      height: 60%;
     }
   }
 }
@@ -140,9 +185,11 @@
   line-height: 1;
 }
 
-// Language toggle
-.sidebar__lang {
+// Language + theme controls, one row. `stretch` keeps the theme button exactly
+// as tall as the language buttons without hardcoding a height.
+.sidebar__controls {
   display: flex;
+  align-items: stretch;
   gap: 8px;
   padding: 16px 20px 24px;
 }
@@ -157,7 +204,10 @@
   font-size: 12px;
   font-weight: 500;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: background 0.15s, color 0.15s;
+  }
 
   &--active {
     background: $accent-red;
@@ -169,4 +219,36 @@
     background: $navy-border;
     color: $text-primary;
   }
+}
+
+// Theme toggle — deliberately mirrors .sidebar__lang-btn (same background,
+// border, radius and hover) because it sits in the same row. It is not styled
+// like a social button, which hovers to the accent colour.
+.sidebar__theme-btn {
+  flex: 0 0 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border-radius: 5px;
+  border: 1px solid $navy-border;
+  background: $navy-light;
+  color: $text-muted;
+  cursor: pointer;
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: background 0.15s, color 0.15s;
+  }
+
+  &:hover {
+    background: $navy-border;
+    color: $text-primary;
+  }
+}
+
+// Inherits colour from the button, so it adapts to both themes.
+.sidebar__theme-icon {
+  width: 15px;
+  height: 15px;
+  display: block;
 }

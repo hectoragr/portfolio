@@ -1,6 +1,13 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router';
 import AppShell from './AppShell';
+
+vi.mock('react-i18next', () => ({
+  useTranslation: () => ({
+    t: (key: string, fallback?: string) => fallback ?? key,
+    i18n: { changeLanguage: vi.fn(), language: 'en' },
+  }),
+}));
 
 vi.mock('./Sidebar', () => ({
   default: ({ onNavClick }: { onNavClick: () => void }) => (

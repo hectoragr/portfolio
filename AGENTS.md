@@ -16,7 +16,7 @@ S3 + CloudFront at **https://hectoragomez.com**.
 
 | Fact | Value |
 |---|---|
-| GitHub repo | `hectoragr/portfolio` (**private**) |
+| GitHub repo | `hectoragr/portfolio` (**public** since 2026-07-27) |
 | Default branch | `master` |
 | Live URL | https://hectoragomez.com (+ `www.` alias) |
 | Hosting | AWS S3 (origin) + CloudFront (CDN) + Route 53 (DNS) + ACM (TLS) |
@@ -84,8 +84,8 @@ All commands run from the repo root. Timings measured on Linux, Node 22.22.0, np
 |---|---|---|
 | `npm ci` | Clean install, exactly matches CI | ✅ **~2 min cold** |
 | `npm start` | Vite dev server + HMR | ✅ **http://localhost:5173** — *not* 3000 |
-| `npm run build` | Production bundle → `build/` | ✅ 84 modules, **~2.5 s** |
-| `npm test` | Vitest, single run | ✅ **4 files / 17 tests**, ~2.3 s |
+| `npm run build` | Production bundle → `build/` | ✅ Vite 8 / Rolldown, 122 modules, **~0.8 s** |
+| `npm test` | Vitest, single run | ✅ **4 files / 18 tests**, ~2.9 s |
 | `npm run test:watch` | Vitest watch mode | ✅ |
 | `npm run typecheck` | `tsc --noEmit` | ✅ clean |
 | `npm run preview` | Serve the built `build/` locally | ✅ |
@@ -103,9 +103,9 @@ One command, must exit 0. **CI runs exactly these three steps in the same order*
 ### Build output (verified)
 
 ```
-build/index.html                   2.90 kB │ gzip:   1.04 kB
-build/assets/index-<hash>.css    237.87 kB │ gzip:  32.36 kB   ← ~90% is Bootstrap
-build/assets/index-<hash>.js     310.67 kB │ gzip: 100.46 kB
+build/index.html                   3.49 kB │ gzip:   1.22 kB
+build/assets/index-<hash>.css    243.51 kB │ gzip:  33.27 kB   ← ~90% is Bootstrap
+build/assets/index-<hash>.js     323.64 kB │ gzip: 104.07 kB
 build/{favicon.ico, manifest.json, robots.txt, sitemap.xml, img/, assets/profile.jpg}
 ```
 
@@ -115,8 +115,12 @@ depends on this. Don't "fix" it.
 ### Expected output
 
 A clean run emits **no warnings**. The Sass and Vite CJS deprecation warnings that used to appear were
-fixed (`sass:color` module, `api: 'modern-compiler'`, `"type": "module"`). **If a deprecation warning
-reappears, treat it as a regression**, not as background noise.
+fixed (`api: 'modern-compiler'`, `"type": "module"`). **If a deprecation warning reappears, treat it as
+a regression**, not as background noise.
+
+`css.preprocessorOptions.scss.api = 'modern-compiler'` is still accepted under Vite 8 — verified, keep
+it. `optimizeDeps.rolldownOptions` turned out **not** to be needed, because no source file relies on a
+non-standard loader any more.
 
 ### Command gotchas
 
@@ -135,9 +139,16 @@ they work identically on Linux, macOS, and Windows (PowerShell or cmd). `cross-e
 dependency if you ever need to set env vars in a script.
 
 **Agent tool constraints.** Long-running commands (e.g., `npm ci` on cold cache) may time out or have
-their output truncated in AI IDE terminals. Prefer `npm run build` (fast, ~2.5 s) for verification over
+their output truncated in AI IDE terminals. Prefer `npm run build` (fast, ~0.8 s) for verification over
 `npm ci` when packages are already installed. When terminal output is truncated, the command still
 ran — check the exit code, not the output completeness.
+
+**Never run `npm view <pkg> versions --json`.** The response is large enough to hang an agent terminal
+until it times out. Use `npm view <pkg> dist-tags` (wrapped in `timeout 20`) instead.
+
+**`npm audit fix` can claim a fix exists when none does.** When an advisory's vulnerable range extends
+past the latest published version, npm still prints "fix available via `npm audit fix`" and the fix is a
+no-op. Always re-run `npm audit` afterwards and confirm the count actually dropped.
 
 ---
 
@@ -146,17 +157,18 @@ ran — check the exit code, not the output completeness.
 ### Runtime flow
 
 ```
-index.html            (repo root — Vite entry, all static SEO meta + JSON-LD)
-  └─ /src/index.js    createRoot → <App/>, then serviceWorker.unregister()
+index.html            (repo root — Vite entry, static SEO meta + JSON-LD + hreflang)
+  └─ /src/index.tsx   createRoot → <App/>, then serviceWorker.unregister()
        └─ App.tsx
             └─ HelmetProvider           react-helmet-async: per-page <head>
-                 └─ BrowserRouter
-                      └─ AppShell       hamburger + sidebar + <main>
-                           └─ Routes
-                                /        → HomePage
-                                /resume  → Resume
-                                /faq     → FAQ        (labelled "Socials" in the UI)
-                                *        → FourOhFour
+                 └─ ThemeProvider       dark/light tokens via html[data-theme]
+                      └─ BrowserRouter
+                           └─ AppShell  SkipLink + RouteAnnouncer + sidebar + <main>
+                                └─ Routes
+                                     /          → HomePage
+                                     /resume    → Resume
+                                     /projects  → Projects
+                                     *          → FourOhFour
 ```
 
 ### File map
@@ -166,16 +178,24 @@ index.html            (repo root — Vite entry, all static SEO meta + JSON-LD)
 | `index.html` | **Real** Vite entry. Static `<title>`, SEO meta, OG/Twitter cards, Person JSON-LD. |
 | `public/` | Copied verbatim to `build/`. Contains `favicon.ico`, `manifest.json`, `robots.txt`, `sitemap.xml`, `img/`, `assets/profile.jpg`. |
 | `.nvmrc` | Node version (22). Read by CI via `node-version-file` — the single source of truth. |
-| `src/index.js` | Bootstrap: React root, plus a one-off cleanup that unregisters any legacy CRA service worker. JSX in a `.js` file — handled by the custom Vite plugin. |
+| `src/index.tsx` | Bootstrap: React root, plus a one-off cleanup that unregisters any legacy CRA service worker. Imports `index.scss`. |
+| `src/index.scss` | Global styles. **The one place `_tokens.scss` is emitted** — keep it imported from `index.tsx`. Also holds `.sr-only` and the print palette override. |
 | `src/App.tsx` | Providers + routes. Imports Bootstrap CSS globally. |
-| `src/commons/AppShell.tsx` | Two-column shell; mobile drawer state (`sidebarOpen`) + overlay. |
-| `src/commons/Sidebar.tsx` | Photo, name/title, socials, `navItems` array, AI-Chat external link, EN/ES toggle. |
+| `src/commons/AppShell.tsx` | Two-column shell; skip link, route announcer, drawer state (`sidebarOpen`) + overlay, focus management, `<main id="main-content">`. |
+| `src/commons/Sidebar.tsx` | Photo, name/title, socials, `navItems` array, AI-Chat external link, and a single `.sidebar__controls` row holding EN/ES + the theme toggle. All icons here are inline SVG using `stroke="currentColor"` so they follow the active theme — **do not reintroduce emoji icons**, they carry their own colour and break in one theme or the other. (Nav items are the exception and still use emoji.) |
+| `src/contexts/ThemeContext.tsx` | `ThemeProvider` + `useTheme`. localStorage → `prefers-color-scheme` → `html[data-theme]`. |
+| `src/components/SkipLink.tsx` | Skip-to-content link; must stay the first focusable element. |
+| `src/components/RouteAnnouncer.tsx` | `aria-live="polite"` region announcing route changes. Holds the pathname → title map. |
+| `src/hooks/useFocusOnRouteChange.ts` | Moves focus to `<main>` on navigation (skips first render). |
+| `src/hooks/useFocusTrap.ts` | Tab/Shift+Tab containment + Escape for the mobile drawer. |
 | `src/config/personal.ts` | `PERSONAL` const: name, title, location, email, linkedin, github, photo. |
 | `src/commons/work-experience.json` | **All** resume content, both languages. See §6. |
 | `src/commons/skills.json` | Skills grid content. See §6. |
-| `src/i18n/{index.ts,en.json,es.json}` | i18next setup + UI strings (32 keys each). |
-| `src/styles/_variables.scss` | The 8 design tokens. |
-| `src/HomePage/`, `src/Resume/`, `src/FAQ/`, `src/404.tsx` | Pages, each with a co-located `.scss`. |
+| `src/commons/projects.json` | Projects page content, both languages. See §6. |
+| `src/i18n/{index.ts,en.json,es.json}` | i18next setup + UI strings (35 keys each). |
+| `src/styles/_tokens.scss` | CSS custom properties for both themes. **The only place colors are defined.** |
+| `src/styles/_variables.scss` | Sass aliases (`$navy-deep: var(--color-bg-deep)`) over those tokens. |
+| `src/HomePage/`, `src/Resume/`, `src/Projects/`, `src/404.tsx` | Pages, each with a co-located `.scss`. |
 | `src/test/setup.ts` | Loads `@testing-library/jest-dom`. Wired via `vite.config.ts`. |
 | `.github/workflows/deploy.yml` | The entire CI/CD pipeline. See §9. |
 | `infrastructure/*.tf` | Terraform for all AWS resources. See §10. |
@@ -187,8 +207,11 @@ index.html            (repo root — Vite entry, all static SEO meta + JSON-LD)
 
 - **Language selection:** `i18n.language === 'es' ? 'es' : 'en'` — the JSON files are keyed by language
   at the *top* level, so components index into `data[lang]`. Persisted to `localStorage['i18nextLng']`.
-- **Vite JSX-in-.js plugin:** `vite.config.ts` runs `transformWithEsbuild` over `src/**/*.js` so
-  `src/index.js` can contain JSX. Prefer `.tsx` for anything new.
+- **Router imports come from `react-router`, not `react-router-dom`.** `react-router-dom` was removed
+  at v8; it is a hard error to reinstall it.
+- **There is no JSX-in-`.js` plugin any more.** The old `treat-js-files-as-jsx` transform and the
+  `optimizeDeps.esbuildOptions` loader override were deleted with the Vite 8 migration. Every source
+  file is `.ts`/`.tsx`; keep it that way.
 - **`tsconfig.json` covers `src` only.** `vite.config.ts` is not typechecked, which is why its
   Vitest `test` block doesn't error. Vitest globals are declared via
   `"types": ["vitest/globals", "@testing-library/jest-dom"]`, which is what makes `npm run typecheck`
@@ -199,11 +222,22 @@ index.html            (repo root — Vite entry, all static SEO meta + JSON-LD)
 
 ### Styling
 
-- Tokens in `src/styles/_variables.scss` — **the only place colors are defined**:
-  `$navy-deep #1a1a2e`, `$navy-mid #16213e`, `$navy-light #0f3460`, `$navy-border #1a3a6e`,
-  `$accent-red #e94560`, `$text-primary #ccd6f6`, `$text-muted #8892b0`, `$text-dim #6b7db3`.
+- Colors live in `src/styles/_tokens.scss` as CSS custom properties, defined twice: once on
+  `:root, [data-theme="dark"]` and once on `[data-theme="light"]`. Dark doubles as the no-attribute
+  default so there is no light flash before `ThemeProvider` runs.
+- `src/styles/_variables.scss` aliases each token to the historical Sass name
+  (`$navy-deep: var(--color-bg-deep)`), which is why existing components needed no changes.
+- ⚠️ **Those `$` variables are `var()` references, not colors.** Passing one to a Sass color function
+  (`color.adjust`, `darken`, `rgba`, `mix`) is a build error — Sass cannot see through a custom
+  property. Add a token instead. This is why `--color-accent-hover` and `--color-accent-active` exist:
+  they replaced a `color.adjust($accent-red, …)` call in `Resume.scss` and a hardcoded `#c73652` in
+  `Sidebar.scss`.
 - Every component SCSS starts with `@use '../styles/variables' as *;` (modern Sass module syntax —
   do not use `@import`).
+- **Motion is opt-in.** Every transition/animation sits inside
+  `@media (prefers-reduced-motion: no-preference)`.
+- **Printing** overrides the tokens to a monochrome palette in `src/index.scss`, so print styling
+  works regardless of the active theme.
 - **BEM naming**: `.sidebar__nav-item--active`, `.home-section__title`, `.timeline-item__dot`.
 - **No inline styles** in new code (a few legacy ones remain in `src/404.tsx`).
 - Bootstrap 5 is imported globally for grid/utilities only; layout is custom flexbox.
@@ -222,7 +256,10 @@ index.html            (repo root — Vite entry, all static SEO meta + JSON-LD)
     }),
   }));
   ```
-- Components using `<NavLink>`/`<Link>` must be wrapped in `<MemoryRouter>`.
+- Components using `<NavLink>`/`<Link>` must be wrapped in `<MemoryRouter>` (imported from
+  `react-router`).
+- **Anything rendering `Sidebar` for real must also be wrapped in `<ThemeProvider>`** — `useTheme`
+  throws outside a provider by design. `AppShell.test.tsx` sidesteps this by mocking `./Sidebar`.
 - Mock the JSON data modules (`vi.mock('../commons/work-experience.json', ...)`) so content edits don't
   break tests.
 
@@ -293,11 +330,40 @@ design. If you want a brand color in Spanish too, add the Spanish string to the 
 Unlike work-experience, this is a **single list** with per-item `name`/`nameEs`.
 Current categories: Frontend, Backend, AI, Cloud & Infra, Tools. Max 7 skills per category.
 
+### `src/commons/projects.json`
+
+Same bilingual top-level shape as work-experience: `{ "en": { "projects": [...] }, "es": {...} }`.
+Both blocks must hold the same projects in the same order.
+
+```jsonc
+{
+  "en": {
+    "projects": [
+      {
+        "id":          "string",        // unique, used as the React key
+        "title":       "string",
+        "description": "string",
+        "techStack":   ["string"],      // rendered as tags
+        "liveUrl":     "string",        // required
+        "repoUrl":     "string" | null, // null hides the "View Source" link
+        "thumbnail":   "string" | null  // reserved; not rendered yet
+      }
+    ]
+  }
+}
+```
+
+`Projects.tsx` falls back to the `en` block if the active language key is missing, so a bad edit
+degrades to the wrong language rather than a blank page. The page also derives its `ItemList` /
+`CreativeWork` JSON-LD from this array via the exported `buildProjectsJsonLd` helper — one entry per
+project, so adding a project updates the structured data automatically.
+
 ### `src/i18n/{en,es}.json`
 
-33 keys each, grouped under `welcome`, `homepage`, `home`, `nav`, `resume`, `404`.
+35 keys each, grouped under `home`, `nav`, `projects`, `theme`, `a11y`, `resume`, `404`.
 Components call `t('key.path', 'English fallback')` — the fallback is what tests assert on, so keep it
-accurate. Both files must have **identical key sets**.
+accurate. Both files must have **identical key sets**; verified parity as of the ledger date, with no
+unused keys remaining.
 
 ---
 
@@ -305,10 +371,13 @@ accurate. Both files must have **identical key sets**.
 
 A content change often touches more than one of these. Check all four:
 
-1. `index.html` — static `<title>`, description, keywords, OG/Twitter, canonical, Person JSON-LD
-   (`knowsAbout`, `alumniOf`, `worksFor`).
-2. Per-page `<Helmet>` blocks in `HomePage.tsx`, `Resume.tsx`, `FAQ.tsx`.
-3. `public/sitemap.xml` — currently lists `/`, `/resume`, `/faq`. **A new route must be added here.**
+1. `index.html` — static `<title>`, description, keywords, OG/Twitter, canonical, `hreflang`
+   alternates (en / es / x-default), Person JSON-LD (`knowsAbout`, `alumniOf`, `worksFor`).
+   `worksFor` is Amazon; `alumniOf` is Oracle + Intel + AWS. Keep these in step with
+   `work-experience.json` when the current role changes.
+2. Per-page `<Helmet>` blocks in `HomePage.tsx`, `Resume.tsx`, `Projects.tsx`.
+3. `public/sitemap.xml` — currently lists `/`, `/resume`, `/projects`, each with `<lastmod>`.
+   **A new route must be added here.**
 4. `public/robots.txt` — allow-all + sitemap pointer.
 
 ⚠️ `public/*` files are **not content-hashed** but are uploaded with `max-age=31536000, immutable`
@@ -412,11 +481,18 @@ S3 returns 403/404 for `/resume` and `/faq` because no such objects exist. `clou
 **403 and 404 → `/index.html` with HTTP 200**, letting React Router take over. If client-side routes
 start 404-ing in production, that's the block to check.
 
-**State is local and unbacked** — see [Known issues #2](#13-known-issues). Two timestamped state
+**State is local and unbacked** — see [Known issues #1](#13-known-issues). Two timestamped state
 backups were previously tracked in git; they were untracked on 2026-07-27 and
-`infrastructure/terraform.tfstate*` now covers every variant in `.gitignore`. (For the record: those
-files held resource IDs and ARNs but **no credentials or key material** — `private_key` was `null`
-throughout — and the repo is private.)
+`infrastructure/terraform.tfstate*` now covers every variant in `.gitignore`.
+
+⚠️ **Untracking them did not remove them from git history, and this repo is now public.** Verified by
+reading the blobs directly: they contain **no credentials or key material** (`private_key` and
+`certificate_body` are both `null`). They *do* publicly expose infrastructure identifiers — the AWS
+account ID, the `portfolio-github-actions-deploy` role ARN and its OIDC trust policy, the Route 53
+hosted zone ID, and the CloudFront distribution ID. None of that grants access on its own; it is
+recon-grade detail that was accepted knowingly when the repo went public. Removing it would require
+`git filter-repo` plus a force-push across every branch — **do not attempt that without explicit
+instruction.** The real lesson: never commit state again, which the `.gitignore` entry now enforces.
 
 Procedures: [`docs/workflows/infra-terraform.md`](docs/workflows/infra-terraform.md).
 
@@ -507,37 +583,43 @@ Direct pushes to `master` deploy to production. For anything non-trivial, branch
 Verified, open, and each with the fix. Fix them opportunistically; **delete the entry when you do** —
 see [`commit-audit.md`](docs/workflows/commit-audit.md) step 4.
 
-The eleven issues in the first version of this file were all closed on 2026-07-27. What remains:
+The eleven issues in the first version of this file were all closed on 2026-07-27, and the npm-advisory,
+`autoprefixer`, and unused-i18n-key entries were closed by the design-system overhaul. `npm audit`
+currently reports **0 vulnerabilities**. What remains:
 
-1. **Four npm advisories that need a Vite 5 → 8 major upgrade.** `npm audit` reports 1 moderate + 3
-   high. All of them are **dev-server-only** and do not affect the deployed static site:
-   - `esbuild` / `vite` — dev server request forgery, path traversal in optimized-deps `.map`
-     handling, `server.fs.deny` bypass on Windows, `launch-editor` NTLM disclosure on Windows.
-   - `react-router` — CSRF bypass in **RSC mode**. This app is a client-only `BrowserRouter` SPA with
-     no server components and no actions, so the vulnerable path is not reachable.
-
-   `npm audit fix` (non-breaking) is already applied. Clearing the rest requires `vite@8`, which is a
-   real migration — the custom JSX-in-`.js` plugin, `build.outDir`, and the Sass `api` option all need
-   re-verification. Do it deliberately, not with `--force`.
-
-2. **Terraform state is local and unbacked.** `main.tf` has the S3 backend commented out and the
+1. **Terraform state is local and unbacked.** `main.tf` has the S3 backend commented out and the
    state bucket has never been created, so `terraform.tfstate` exists on exactly one machine with no
    locking. This is the largest remaining fragility in the project.
    **Fix:** the "Enabling remote state" section of
    [`infra-terraform.md`](docs/workflows/infra-terraform.md).
 
-3. **`public/` files ship unhashed with a one-year immutable cache.** `sitemap.xml`, `robots.txt`,
+2. **`public/` files ship unhashed with a one-year immutable cache.** `sitemap.xml`, `robots.txt`,
    `favicon.ico`, and `img/og-preview.png` are uploaded with `max-age=31536000, immutable` (§9).
    CloudFront invalidation clears the edge, but returning visitors keep the old copy for up to a year.
    **Fix:** give `public/` its own `aws s3 sync` pass with a short `--cache-control`, or accept the lag
    and rename files when they change.
 
-4. **`autoprefixer` is a dependency with no PostCSS config.** It is installed but never runs — there
-   is no `postcss.config.*` in the repo. Either wire it up or remove the dependency.
+3. **Two token pairs miss the WCAG AA 4.5:1 text contrast floor.** Requirement 4.10 of the
+   design-system spec asks for 4.5:1 in both themes; these two are measured shortfalls, both on
+   *small* text, so they need a palette decision rather than a code fix:
+   - **Dark theme, pre-existing:** `--color-text-muted` `#8892b0` on `--color-bg-light` `#0f3460`
+     = **4.04:1**. Used by `.sidebar__social-btn` and `.sidebar__lang-btn`.
+     Lightening the token to about `#9aa5c4` reaches 4.86:1 and is visually near-identical.
+   - **Light theme, as specified in the design doc:** `--color-text-dim` `#6c757d` on
+     `--color-bg-light` `#e9ecef` = **4.45:1**. Darkening to about `#616870` reaches 4.76:1.
 
-5. **Unused i18n keys.** `welcome`, `homepage.title`, `resume.description`, `resume.technologies`,
-   `resume.current`, and `404.home` are defined in both locale files but referenced by no component.
-   Harmless; tidy them when you next touch `src/i18n/`.
+   The design doc explicitly said "existing palette preserved" for dark, so the values were left as
+   designed rather than changed unilaterally. Everything else clears AA comfortably (dark
+   text-primary 11.8:1, light text-primary 15.5:1, light accent-as-text 4.7–5.6:1).
+
+4. **`hreflang` alternates all point at the same URL.** Language is a client-side toggle persisted to
+   `localStorage['i18nextLng']`; there are no per-language URLs. The `en` / `es` / `x-default` links in
+   `index.html` therefore declare bilingual content on one address, which is weaker than real
+   localized URLs. Fixing it properly means introducing `/es/...` routes.
+
+5. **The Projects `ItemList` JSON-LD is injected client-side** by Helmet, so it is absent from the
+   static `build/index.html`. Google renders JS and will see it; simpler crawlers will not. Only the
+   Person JSON-LD is in the static HTML.
 
 ---
 
@@ -550,3 +632,5 @@ Append one row per commit that changes what agents need to know. Newest last.
 | 2026-07-26 | *(initial)* | Initial `AGENTS.md` + pointer files + 6 playbooks. All commands, build/test output, deploy pipeline, secrets, Terraform layout, and 11 known issues verified by execution against `aee8d0e`. |
 | 2026-07-27 | *(this commit)* | All 11 original known issues closed. §4 rewritten around the new `npm run verify` gate; §9 pipeline now typechecks and tests before building; §8 and §5 updated for `.nvmrc` and `"type": "module"`; §2 documents `.kiro/steering/agents.md`. §13 replaced with 5 remaining issues, all newly verified. Deprecation warnings are now regressions, not noise. |
 | 2026-07-27 | *(this commit)* | resume-linkedin-sync feature: Download/Print button, print CSS (single-page), skills refresh, work-experience typo fixes, Resume.test.tsx (4 tests). §4 test count → 4/17, agent timeout lesson added. §6 updated for Amazon Leo mapping, 33 i18n keys, max-7-skills rule. |
+| 2026-07-27 | *(this commit)* | **`hectoragr/portfolio` and `hectoragr/chatbot-v2` are now public.** Both were secret-scanned across full history before the switch — no credentials found in either. §1 and §10 updated: the two `terraform.tfstate*.backup` blobs still in history are now world-readable, exposing infra identifiers (AWS account ID, role ARN, zone/distribution IDs) but no key material. `projects.json` links both repos as sources. |
+| 2026-07-27 | *(this commit)* | design-system-overhaul, tasks 1–11. **Vite 5→8 + Vitest 3→4**, entry point `index.js`→`index.tsx`, custom JSX plugin deleted, `@types/react-dom` added, tsconfig → es2020/bundler. **`react-router-dom` replaced by `react-router@8`** (only patched release for GHSA-qwww-vcr4-c8h2) which forced React → 19.2.8; `npm audit` now 0. **CSS custom property token system** (`_tokens.scss`) with dark/light themes + `ThemeContext` toggle. **Accessibility layer**: skip link, route announcer, focus-on-route-change, drawer focus trap, one `<h1>` per page, reduced-motion gating, `<article>` wrapper. **`/faq` → `/projects`** with `projects.json`; FAQ deleted. SEO: JSON-LD `worksFor`/`alumniOf` corrected, hreflang, sitemap `lastmod`. `autoprefixer` and 7 unused i18n keys removed; locales now 35/35 with verified parity. §4 build ~0.8 s / 18 tests, §5 rewritten, §6 gained projects.json, §13 rewritten (3 issues closed, 3 new findings recorded). |

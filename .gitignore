@@ -35,3 +35,4 @@ infrastructure/tfplan
 
 # brainstorming visual companion
 .superpowers/
+.kiro/specs/

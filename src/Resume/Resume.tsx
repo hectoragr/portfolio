@@ -60,8 +60,27 @@ const Resume: React.FC = () => {
                 <meta property="og:description" content="Software Engineer with experience at Oracle, AWS, and Intel. React, TypeScript, Java, Spring Boot, and cloud infrastructure." />
             </Helmet>
             <div className="resume-header">
-                <h2>Héctor Alfonso Gómez Reyes<sub>({t('resume.pronouns', 'he/him')})</sub></h2>
-                <p>📍Seattle, WA. (US)</p>
+                <h1>Héctor Alfonso Gómez Reyes<sub>({t('resume.pronouns', 'he/him')})</sub></h1>
+                <p>
+                    {/* Decorative: the text beside it already states the
+                        location, and screen readers announced the emoji as
+                        "round pushpin". */}
+                    <svg
+                        className="resume-location-icon"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.9"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden="true"
+                        focusable="false"
+                    >
+                        <path d="M12 21.5s7-5.7 7-11a7 7 0 1 0-14 0c0 5.3 7 11 7 11z" />
+                        <circle cx="12" cy="10.3" r="2.6" />
+                    </svg>
+                    Seattle, WA. (US)
+                </p>
                 <p>{t('resume.softwareEngineer', 'Software Engineer')}</p>
                 <p>{t('resume.fulldetailstext')} @ <a href='https://www.linkedin.com/in/hagomezr' target='_blank' rel='noreferrer'>LinkedIn</a></p>
                 <button
@@ -69,7 +88,24 @@ const Resume: React.FC = () => {
                     onClick={() => window.print()}
                     type="button"
                 >
-                    🖨️ {t('resume.downloadBtn', 'Download / Print')}
+                    {/* Inline SVG rather than a printer emoji: emoji render in
+                        their own fixed colours and ignore the active theme. */}
+                    <svg
+                        className="resume-download-btn__icon"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden="true"
+                        focusable="false"
+                    >
+                        <path d="M7 9V3.6h10V9" />
+                        <path d="M7 18H5.2A2.2 2.2 0 0 1 3 15.8v-4.6A2.2 2.2 0 0 1 5.2 9h13.6A2.2 2.2 0 0 1 21 11.2v4.6A2.2 2.2 0 0 1 18.8 18H17" />
+                        <rect x="7" y="13.8" width="10" height="6.6" rx="0.8" />
+                    </svg>
+                    {t('resume.downloadBtn', 'Download / Print')}
                 </button>
             </div>
             <div className='work-experience'>

@@ -14,6 +14,16 @@
     <meta name="author" content="Héctor Alfonso Gómez Reyes" />
     <link rel="canonical" href="https://hectoragomez.com" />
 
+    <!--
+      Language is a client-side toggle persisted to localStorage, so both
+      locales are served from the same URLs. These alternates therefore declare
+      bilingual content on one address rather than pointing at separate
+      per-language URLs.
+    -->
+    <link rel="alternate" hreflang="en" href="https://hectoragomez.com" />
+    <link rel="alternate" hreflang="es" href="https://hectoragomez.com" />
+    <link rel="alternate" hreflang="x-default" href="https://hectoragomez.com" />
+
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://hectoragomez.com" />
@@ -35,20 +45,21 @@
       "name": "Héctor Alfonso Gómez Reyes",
       "url": "https://hectoragomez.com",
       "jobTitle": "Software Engineer",
-      "worksFor": { "@type": "Organization", "name": "Oracle America Inc." },
+      "worksFor": { "@type": "Organization", "name": "Amazon" },
       "alumniOf": [
-        { "@type": "Organization", "name": "Amazon Web Services" },
-        { "@type": "Organization", "name": "Intel Corporation" }
+        { "@type": "Organization", "name": "Oracle" },
+        { "@type": "Organization", "name": "Intel Corporation" },
+        { "@type": "Organization", "name": "Amazon Web Services" }
       ],
       "knowsAbout": ["React", "TypeScript", "Java", "Spring Boot", "AWS", "Terraform", "Python"],
       "address": { "@type": "PostalAddress", "addressLocality": "Seattle", "addressRegion": "WA", "addressCountry": "US" },
-      "sameAs": ["https://hectoragomez.com/resume"]
+      "sameAs": ["https://www.linkedin.com/in/hagomezr", "https://github.com/hagomezr"]
     }
     </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <script type="module" src="/src/index.js"></script>
+    <script type="module" src="/src/index.tsx"></script>
   </body>
 </html>

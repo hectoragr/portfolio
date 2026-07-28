@@ -9,8 +9,11 @@ deployed to AWS S3 + CloudFront.
 
 ## Stack
 
-React 19 · TypeScript 5 · React Router 7 · react-i18next (EN/ES) · Bootstrap 5 · Sass
-· Vite 5 · Vitest + React Testing Library · Terraform · GitHub Actions
+React 19 · TypeScript 5 · React Router 8 · react-i18next (EN/ES) · Bootstrap 5 · Sass
+· Vite 8 · Vitest + React Testing Library · Terraform · GitHub Actions
+
+Dark/light theming via CSS custom properties, and a WCAG 2.1 AA accessibility pass
+(skip link, route announcer, focus management, reduced-motion support).
 
 ## Quick start
 
@@ -36,14 +39,18 @@ npm start     # dev server → http://localhost:5173
 ## Layout
 
 ```
-index.html            Vite entry: static SEO meta + JSON-LD
+index.html            Vite entry: static SEO meta + JSON-LD + hreflang
 src/
-  index.js            React root
+  index.tsx           React root
+  index.scss          Global styles, token emission, print palette
   App.tsx             Providers + routes
-  commons/            AppShell, Sidebar, and the resume/skills JSON data
-  HomePage/ Resume/ FAQ/   Pages, each with a co-located .scss
+  commons/            AppShell, Sidebar, and the resume/skills/projects JSON data
+  contexts/           ThemeContext (dark/light)
+  components/         SkipLink, RouteAnnouncer
+  hooks/              Focus management and focus trap
+  HomePage/ Resume/ Projects/   Pages, each with a co-located .scss
   i18n/               English + Spanish strings
-  styles/             SCSS design tokens
+  styles/             Design tokens (_tokens.scss) + Sass aliases
   config/personal.ts  Name, links, photo
 public/               Copied verbatim into build/ (favicon, sitemap, robots, images)
 infrastructure/       Terraform: S3, CloudFront, Route 53, ACM, GitHub OIDC
