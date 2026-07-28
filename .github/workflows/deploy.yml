@@ -1,21 +1,40 @@
-name: Deploy to AWS
+name: CI & Deploy
 
+# Verify runs on every pull request into master; deploying only happens once a
+# commit actually lands on master.
+#
+# Previously this workflow triggered on push to master only, which meant the
+# typecheck/test/build gate ran *after* the merge — i.e. after the change was
+# already on its way to production. Splitting the two moves the gate in front
+# of the merge without changing what deploys or when.
 on:
   push:
     branches:
       - master
+  pull_request:
+    branches:
+      - master
 
+# Least privilege by default. Only the deploy job opts into OIDC, so pull
+# request runs never receive a token that could reach AWS. This matters because
+# the repo is public: anyone can open a PR and cause `verify` to run.
 permissions:
-  id-token: write  # Required for OIDC authentication
   contents: read
+
+# A superseded pull request run is worth cancelling. An in-flight deploy is not,
+# so pushes to master queue instead, which also stops two merges from racing
+# each other's S3 sync.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 env:
   AWS_REGION: us-east-1
   S3_BUCKET: hectoragomez.com
 
 jobs:
-  deploy:
-    name: Build & Deploy
+  verify:
+    name: Verify
     runs-on: ubuntu-latest
 
     steps:
@@ -31,6 +50,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # These three are exactly what `npm run verify` runs locally, in the same
+      # order, so a green local run predicts a green pipeline.
       - name: Typecheck
         run: npm run typecheck
 
@@ -39,6 +60,35 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      # Handing the build to the deploy job guarantees the bytes that ship are
+      # the exact bytes that passed the gate, rather than the output of a second
+      # build that was never tested.
+      - name: Upload build output
+        uses: actions/upload-artifact@v7
+        with:
+          name: build
+          path: build/
+          retention-days: 1
+          if-no-files-found: error
+
+  deploy:
+    name: Deploy
+    needs: verify
+    # Only a real push to master deploys. Pull request runs stop after verify.
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write  # Required for OIDC authentication
+      contents: read
+
+    steps:
+      - name: Download build output
+        uses: actions/download-artifact@v8
+        with:
+          name: build
+          path: build/
 
       - name: Configure AWS credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v6
