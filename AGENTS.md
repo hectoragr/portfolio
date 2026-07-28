@@ -406,13 +406,13 @@ and CI cannot drift.
 
 | Step | Detail |
 |---|---|
-| 1. Checkout | `actions/checkout@v4` |
-| 2. Node | `actions/setup-node@v4`, `node-version-file: .nvmrc`, `cache: npm` |
+| 1. Checkout | `actions/checkout@v7` |
+| 2. Node | `actions/setup-node@v7`, `node-version-file: .nvmrc`, `cache: npm` |
 | 3. Install | `npm ci` |
 | 4. Typecheck | `npm run typecheck` |
 | 5. Test | `npm test` |
 | 6. Build | `npm run build` |
-| 7. Auth | `aws-actions/configure-aws-credentials@v4` via **OIDC** — no static keys |
+| 7. Auth | `aws-actions/configure-aws-credentials@v6` via **OIDC** — no static keys |
 | 8. Sync | `aws s3 sync build/ s3://hectoragomez.com --delete --exclude index.html --cache-control "max-age=31536000,public,immutable"` |
 | 9. Shell | `aws s3 cp build/index.html s3://hectoragomez.com/index.html --cache-control "no-cache,no-store,must-revalidate"` |
 | 10. Invalidate | `aws cloudfront create-invalidation --paths "/*"` |
@@ -422,6 +422,16 @@ aborts before anything reaches S3.
 
 **Permissions:** `id-token: write`, `contents: read`.
 **Region:** `us-east-1`. **Bucket:** `hectoragomez.com`.
+
+**Action versions must target `node24`.** GitHub-hosted runners force Node 24, so any action still
+built for Node 20 emits a deprecation warning annotation on every run. That is what drove the bump to
+`checkout@v7` / `setup-node@v7` / `configure-aws-credentials@v6`. Two gotchas if you bump further:
+
+- `setup-node@v5+` auto-enables caching when `package.json` has a `packageManager` field. It does not
+  have one, so the explicit `cache: npm` is what is in effect. If you ever add `packageManager`, set
+  `package-manager-cache: false` or expect the behaviour to change.
+- `configure-aws-credentials@v5+` tightened invalid-boolean input handling. This workflow passes only
+  `role-to-assume` and `aws-region`, so it is unaffected.
 
 **Repository secrets** (verified present):
 
