@@ -1,8 +1,21 @@
-$navy-deep:    #1a1a2e;
-$navy-mid:     #16213e;
-$navy-light:   #0f3460;
-$navy-border:  #1a3a6e;
-$accent-red:   #e94560;
-$text-primary: #ccd6f6;
-$text-muted:   #8892b0;
-$text-dim:     #6b7db3;
+// Sass aliases for the CSS custom properties declared in _tokens.scss.
+//
+// These names are kept so the existing component stylesheets keep working
+// unchanged while the underlying values become runtime-swappable.
+//
+// IMPORTANT: each value is now a `var(...)` reference, not a literal color, so
+// it CANNOT be passed to a Sass color function (color.adjust, darken, rgba,
+// mix, ...). Sass resolves those at build time and has no way to see through a
+// custom property. If you need a variant of a color, add a token to
+// _tokens.scss and alias it here instead.
+
+$navy-deep: var(--color-bg-deep);
+$navy-mid: var(--color-bg-mid);
+$navy-light: var(--color-bg-light);
+$navy-border: var(--color-border);
+$accent-red: var(--color-accent);
+$accent-red-hover: var(--color-accent-hover);
+$accent-red-active: var(--color-accent-active);
+$text-primary: var(--color-text-primary);
+$text-muted: var(--color-text-muted);
+$text-dim: var(--color-text-dim);

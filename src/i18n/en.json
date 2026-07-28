@@ -1,8 +1,4 @@
 {
-    "welcome": "Welcome",
-    "homepage": {
-        "title": "Hello world!"
-    },
     "home": {
         "title": "Home",
         "bio": "Software Engineer with experience building production systems at Oracle Cloud Infrastructure, Amazon Web Services, and Intel. I specialize in React, TypeScript, and cloud infrastructure — turning complex requirements into reliable, maintainable software.",
@@ -13,33 +9,43 @@
     "nav": {
         "home": "Home",
         "resume": "Resume",
-        "faq": "Socials",
+        "projects": "Projects",
         "chat": "AI Chat"
     },
+    "projects": {
+        "title": "Projects",
+        "viewLive": "View Live",
+        "viewSource": "View Source"
+    },
+    "theme": {
+        "toggleLight": "Switch to light theme",
+        "toggleDark": "Switch to dark theme"
+    },
+    "a11y": {
+        "skipToContent": "Skip to main content",
+        "toggleMenu": "Toggle menu",
+        "navigationMenu": "Navigation menu"
+    },
     "resume": {
-        "title": "Resume",
         "pronouns": "He/Him",
-        "description": "Here is my resume.",
         "softwareEngineer": "Software Engineer",
         "fulldetailstext": "Full details:",
         "workexptitle": "Work Experience",
         "educationtitle": "Education",
         "outsideworktitle": "Outside of Work",
         "skills": "Skills",
-        "technologies": "Technologies",
         "hobbies": "Hobbies",
         "languages": "Languages",
         "interests": "Interests",
         "classOf": "Class of",
         "from": "From",
         "to": "to",
-        "current": "Current",
         "present": "present",
         "downloadBtn": "Download / Print"
     },
     "404": {
+        "title": "Page not found",
         "p1": "The page you are looking for does not exist.",
-        "p2": "Please check the URL or return to the",
-        "home": "Home"
+        "p2": "Please check the URL or return to the"
     }
 }

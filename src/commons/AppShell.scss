@@ -19,7 +19,10 @@
   @media (max-width: 767px) {
     position: fixed;
     left: -280px;
-    transition: left 0.25s ease;
+
+    @media (prefers-reduced-motion: no-preference) {
+      transition: left 0.25s ease;
+    }
 
     &.open {
       left: 0;
@@ -65,8 +68,33 @@
   overflow-y: auto;
   color: $text-primary;
 
+  // Programmatic focus target for route changes; the outline would otherwise
+  // draw a box around the whole page.
+  &:focus {
+    outline: none;
+  }
+
   @media (max-width: 767px) {
     padding: 60px 20px 20px;
+  }
+}
+
+// Route transition. Entirely inside the media query so that with reduced
+// motion requested the content simply appears at full opacity.
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes route-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .route-fade {
+    animation: route-fade-in 0.2s ease-out;
   }
 }
 

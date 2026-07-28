@@ -1,0 +1,41 @@
+// Design tokens — the single source of truth for every color in the app.
+//
+// Values are CSS custom properties so the active palette can be swapped at
+// runtime (see src/contexts/ThemeContext.tsx) with no rebuild. Sass code should
+// not reference these names directly; it goes through _variables.scss, which
+// aliases every token to the `$name` form the components already use.
+//
+// Dark is the default palette. It applies both when no `data-theme` attribute
+// is present (first paint, before ThemeContext runs) and when it is "dark",
+// which avoids a light flash for dark-theme visitors.
+
+:root,
+[data-theme='dark'] {
+  --color-bg-deep: #1a1a2e;
+  --color-bg-mid: #16213e;
+  --color-bg-light: #0f3460;
+  --color-border: #1a3a6e;
+  --color-accent: #e94560;
+  // Lighter/darker accent variants. These exist as tokens because Sass color
+  // functions cannot operate on a var() value — see _variables.scss.
+  --color-accent-hover: #ff6b85;
+  --color-accent-active: #c73652;
+  --color-text-primary: #ccd6f6;
+  --color-text-muted: #8892b0;
+  --color-text-dim: #6b7db3;
+}
+
+[data-theme='light'] {
+  --color-bg-deep: #f8f9fa;
+  --color-bg-mid: #ffffff;
+  --color-bg-light: #e9ecef;
+  --color-border: #dee2e6;
+  --color-accent: #c7253e;
+  // On a light background the accent has to get *darker* on hover, not
+  // lighter, or the text/background contrast drops below AA.
+  --color-accent-hover: #a01d33;
+  --color-accent-active: #8f1a2d;
+  --color-text-primary: #1a1a2e;
+  --color-text-muted: #495057;
+  --color-text-dim: #6c757d;
+}

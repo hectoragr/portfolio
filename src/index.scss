@@ -1,0 +1,74 @@
+// Global stylesheet. This is the one place the token definitions get emitted,
+// so it must stay imported from src/index.tsx.
+@use './styles/tokens';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-bg-deep);
+  color: var(--color-text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--color-accent);
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+}
+
+// Available to assistive technology but not painted. Used for the per-page
+// <h1> elements and the route announcer's live region.
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+// Printing forces a light, near-monochrome palette regardless of the active
+// theme. Overriding the tokens here means every component that reads them
+// switches at once, instead of each stylesheet needing its own print rules.
+@media print {
+  :root,
+  [data-theme='dark'],
+  [data-theme='light'] {
+    --color-bg-deep: #ffffff;
+    --color-bg-mid: #ffffff;
+    --color-bg-light: #ffffff;
+    --color-border: #cccccc;
+    --color-accent: #000000;
+    --color-accent-hover: #000000;
+    --color-accent-active: #000000;
+    --color-text-primary: #000000;
+    --color-text-muted: #000000;
+    --color-text-dim: #444444;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  a {
+    color: #000;
+  }
+
+  .skip-link {
+    display: none !important;
+  }
+}

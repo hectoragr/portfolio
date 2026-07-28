@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
+import { PERSONAL } from '../config/personal';
 import skillsData from '../commons/skills.json';
 import workData from '../commons/work-experience.json';
 import './HomePage.scss';
@@ -50,6 +51,10 @@ const HomePage: React.FC = () => {
         <meta property="og:title" content="Héctor A. Gómez Reyes | Software Engineer" />
         <meta property="og:description" content="Personal website of Héctor A. Gómez Reyes — Software Engineer with experience at Oracle, AWS, and Intel." />
       </Helmet>
+
+      {/* The name already appears in the sidebar, so the page's required <h1>
+          is exposed to assistive tech only rather than duplicated on screen. */}
+      <h1 className="sr-only">{PERSONAL.name}</h1>
 
       {/* About */}
       <section className="home-section">

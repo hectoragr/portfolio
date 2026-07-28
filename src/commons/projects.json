@@ -1,0 +1,46 @@
+{
+    "en": {
+        "projects": [
+            {
+                "id": "ai-chat",
+                "title": "AI Chat Assistant",
+                "description": "A conversational AI assistant built on the OpenAI and DeepSeek APIs, providing information about my professional background.",
+                "techStack": ["React", "TypeScript", "OpenAI API", "DeepSeek API", "Lambda", "DynamoDB"],
+                "liveUrl": "https://chat.hectoragomez.com",
+                "repoUrl": "https://github.com/hectoragr/chatbot-v2",
+                "thumbnail": null
+            },
+            {
+                "id": "portfolio",
+                "title": "Personal Portfolio",
+                "description": "This very site — a static React SPA with dark/light theming, bilingual support, and infrastructure-as-code deployment.",
+                "techStack": ["React", "TypeScript", "Vite", "Terraform", "AWS S3", "CloudFront"],
+                "liveUrl": "https://hectoragomez.com",
+                "repoUrl": "https://github.com/hectoragr/portfolio",
+                "thumbnail": null
+            }
+        ]
+    },
+    "es": {
+        "projects": [
+            {
+                "id": "ai-chat",
+                "title": "Asistente de Chat IA",
+                "description": "Un asistente conversacional construido sobre las APIs de OpenAI y DeepSeek, que proporciona información sobre mi trayectoria profesional.",
+                "techStack": ["React", "TypeScript", "OpenAI API", "DeepSeek API", "Lambda", "DynamoDB"],
+                "liveUrl": "https://chat.hectoragomez.com",
+                "repoUrl": "https://github.com/hectoragr/chatbot-v2",
+                "thumbnail": null
+            },
+            {
+                "id": "portfolio",
+                "title": "Portafolio Personal",
+                "description": "Este mismo sitio — una SPA React estática con tema claro/oscuro, soporte bilingüe y despliegue con infraestructura como código.",
+                "techStack": ["React", "TypeScript", "Vite", "Terraform", "AWS S3", "CloudFront"],
+                "liveUrl": "https://hectoragomez.com",
+                "repoUrl": "https://github.com/hectoragr/portfolio",
+                "thumbnail": null
+            }
+        ]
+    }
+}
