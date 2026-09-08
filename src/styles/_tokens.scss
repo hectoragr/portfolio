@@ -11,31 +11,36 @@
 
 :root,
 [data-theme='dark'] {
-  --color-bg-deep: #1a1a2e;
-  --color-bg-mid: #16213e;
-  --color-bg-light: #0f3460;
-  --color-border: #1a3a6e;
-  --color-accent: #e94560;
+  // Ember Slate — neutral charcoal base (no blue cast) with a warm amber/orange
+  // accent. Higher contrast than the previous navy/coral palette.
+  --color-bg-deep: #0f0f10;
+  --color-bg-mid: #1a1a1c;
+  --color-bg-light: #242426;
+  --color-border: #333336;
+  --color-accent: #ff7a45;
   // Lighter/darker accent variants. These exist as tokens because Sass color
   // functions cannot operate on a var() value — see _variables.scss.
-  --color-accent-hover: #ff6b85;
-  --color-accent-active: #c73652;
-  --color-text-primary: #ccd6f6;
-  --color-text-muted: #8892b0;
-  --color-text-dim: #6b7db3;
+  --color-accent-hover: #ff9e73;
+  --color-accent-active: #e0602f;
+  --color-text-primary: #fafafa;
+  --color-text-muted: #dcdcdc;
+  --color-text-dim: #9a9a9e;
 }
 
 [data-theme='light'] {
-  --color-bg-deep: #f8f9fa;
-  --color-bg-mid: #ffffff;
-  --color-bg-light: #e9ecef;
-  --color-border: #dee2e6;
-  --color-accent: #c7253e;
+  // Slate Tint — a barely-blue gray "paper" that echoes the charcoal-neutral
+  // Ember Slate dark theme, so light and dark read as one system. Low glare,
+  // AA contrast against the dark text below.
+  --color-bg-deep: #e4e6ea;
+  --color-bg-mid: #eef0f3;
+  --color-bg-light: #d9dbe0;
+  --color-border: #cfd2d8;
+  --color-accent: #b0202f;
   // On a light background the accent has to get *darker* on hover, not
   // lighter, or the text/background contrast drops below AA.
-  --color-accent-hover: #a01d33;
-  --color-accent-active: #8f1a2d;
-  --color-text-primary: #1a1a2e;
-  --color-text-muted: #495057;
-  --color-text-dim: #6c757d;
+  --color-accent-hover: #8f1a2d;
+  --color-accent-active: #7a1626;
+  --color-text-primary: #1e2024;
+  --color-text-muted: #494c52;
+  --color-text-dim: #6a6d74;
 }

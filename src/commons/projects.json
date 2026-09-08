@@ -3,9 +3,9 @@
         "projects": [
             {
                 "id": "ai-chat",
-                "title": "AI Chat Assistant",
-                "description": "A conversational AI assistant built on the OpenAI and DeepSeek APIs, providing information about my professional background.",
-                "techStack": ["React", "TypeScript", "OpenAI API", "DeepSeek API", "Lambda", "DynamoDB"],
+                "title": "AI Chat Platform",
+                "description": "End-to-end conversational AI product: streaming LLM completions (OpenAI/DeepSeek), secure token-based auth, and modular components in a unified Next.js monorepo with Lambda-backed API routes.",
+                "techStack": ["Next.js", "TypeScript", "AWS Lambda", "DynamoDB", "Auth0", "OpenAI API", "DeepSeek API"],
                 "liveUrl": "https://chat.hectoragomez.com",
                 "repoUrl": "https://github.com/hectoragr/chatbot-v2",
                 "thumbnail": null
@@ -25,9 +25,9 @@
         "projects": [
             {
                 "id": "ai-chat",
-                "title": "Asistente de Chat IA",
-                "description": "Un asistente conversacional construido sobre las APIs de OpenAI y DeepSeek, que proporciona información sobre mi trayectoria profesional.",
-                "techStack": ["React", "TypeScript", "OpenAI API", "DeepSeek API", "Lambda", "DynamoDB"],
+                "title": "Plataforma de Chat IA",
+                "description": "Producto conversacional de IA de extremo a extremo: respuestas LLM en streaming (OpenAI/DeepSeek), autenticación segura basada en tokens y componentes modulares en un monorepo unificado de Next.js con rutas de API respaldadas por Lambda.",
+                "techStack": ["Next.js", "TypeScript", "AWS Lambda", "DynamoDB", "Auth0", "OpenAI API", "DeepSeek API"],
                 "liveUrl": "https://chat.hectoragomez.com",
                 "repoUrl": "https://github.com/hectoragr/chatbot-v2",
                 "thumbnail": null

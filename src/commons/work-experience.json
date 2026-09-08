@@ -2,28 +2,31 @@
    "es": {
      "jobs": [
         {
-            "title": "Front End Engineer II",
+            "title": "Ingeniero de Desarrollo de Software",
             "company": "Amazon Leo (a través de INSPYR Solutions)",
             "location": "Redmond, WA (EUA)",
             "startDate": "2026-03-31",
             "endDate": null,
-            "description": "Ingeniero front-end trabajando para Amazon Leo (anteriormente Amazon Kuiper) como contratista para INSPYR Solutions.",
+            "description": "Ingeniero front-end y full-stack en una plataforma de monitoreo operativo en tiempo real — React/Next.js sobre servicios Node BFF y una capa de datos de telemetría respaldada por ClickHouse.",
             "bullets": [
-                "Desarrollo guiado por especificaciones con Kiro",
-                "React y RTL para los paneles de salud de satélites",
-                "Actualización de páginas Next JS migrando a Lambdas desde AppSync",
-                "Desarrollo impulsado por IA utilizando herramientas como Kiro, Claude Code, Amazon Q y otras herramientas internas con modelos AWS Bedrock para acelerar el desarrollo.",
-                "Desarrollo de habilidades para mantener los repositorios actualizados con las mejores prácticas y mejorar continuamente la calidad y mantenibilidad del código."
+                "Uno de los que más entregó en el equipo — 166 cambios en producción con una tasa de fusión de ~98% en 5 paquetes en ~6 meses, abarcando diseño, implementación y pruebas de extremo a extremo.",
+                "Diseñé y construí servicios Node BFF endurecidos — constructores de consultas con validación de entrada, respuestas de error saneadas y consultas con alcance por namespace sobre un almacén de telemetría ClickHouse — unificando seis fuentes de datos operativos detrás de una sola API.",
+                "Fundé desde cero una librería compartida de componentes en TypeScript y migré la aplicación insignia a ella, eliminando la UI duplicada entre paneles (puntos de entrada cliente/servidor/test-utils sin SDK, costuras DTO estructurales, contrato de test-id congelado).",
+                "Me convertí en el responsable de estándares del equipo — autor único del estándar de ingeniería de ~400 líneas más guías de contribución por paquete (convenciones de API/BFF, doctrina de pruebas en el mismo commit, patrones e2e deterministas, reglas para agentes de IA destiladas de retrospectivas de bugs en producción).",
+                "Revisor de confianza en todo el equipo (más de 170 cambios de 20 ingenieros) que detectó repetidamente lo que los revisores automáticos pasaron por alto — un bypass de seguridad en la lista de URLs permitidas, consultas de datos entre inquilinos, huecos en la contabilidad de cobertura — manteniendo las fusiones desbloqueadas con tickets de seguimiento inmediato.",
+                "Reduje el tiempo de ejecución de la suite de extremo a extremo en ~60% (de 11 a 4–5 min) paralelizándola y aumenté la cobertura a más de 130 casos e2e; la compuerta de fusión mantiene más de 5,000 pruebas unitarias en verde.",
+                "Construí el flujo de desarrollo asistido por IA del equipo (integraciones MCP para Jira/Slack/servicios internos más un sistema de reglas de agentes por capas) que permite a los agentes de IA producir cambios listos para revisión."
             ],
             "skills": [
                 "Typescript",
                 "React",
-                "Redux",
+                "Next.js",
+                "Node.js / BFF",
+                "ClickHouse",
                 "React Testing Library",
-                "Kiro",
-                "Desarrollo guiado por especificaciones",
-                "Desarrollo impulsado por IA",
                 "Cypress",
+                "Playwright",
+                "Desarrollo Asistido por IA (MCP)",
                 "AWS"
             ]
         },
@@ -35,26 +38,26 @@
             "endDate": "2025-09-30",
             "description": "Me uní a Oracle Cloud Infrastructure como desarrollador full-stack, avanzando hacia convertirme en Ingeniero Front-end.",
             "bullets": [
-                "Impacté la posición de OCI en Garner para pasar de Niche a Lideres en Cloud al co-liderar la expansión del Marketplace Service, construyendo componentes reutilizables en React que luego se expandieron a Service Catalog, mejorando la clasificación de Garner.",
-                "Incrementé la cobertura de pruebas en un 60% para los portales de Registro y Activación de Cuentas de OCI en React/Redux, y optimicé la incorporación de miles de nuevos usuarios mensualmente.",
-                "Reduje el tiempo de construcción de la UI de Activación en una nueva región de una semana a un proceso de 2 horas.",
-                "Desplegué la UI de Activación en más de 30 nubes privadas, asegurando consistencia de diseño (Redwood), accesibilidad y mayor cobertura de pruebas.",
-                "Entregué proyectos de UI críticos relacionados a Catálogo de Servicios, Gobernanza y modernización de UI, ayudando a los equipos a cumplir con plazos de lanzamiento agresivos.",
-                "Tomé la batuta en las rotaciones de OnCall tanto para la UI como para los servicios de Backend consumidos. Fuí autor de 2 CAPAs."
+                "Entregué componentes de UI reutilizables en TypeScript/React para las UIs de Marketplace, Service Catalog y Activación de OCI, desplegados en más de 30 regiones de nube, co-liderando la expansión del Marketplace Service que llevó a OCI de Nicho a Líderes en la clasificación Cloud de Gartner.",
+                "Incrementé la cobertura de pruebas en un 60% para los portales de Registro y Activación de Cuentas de OCI con suites completas unitarias, de integración y E2E (Jest, React Testing Library, Cypress, Playwright, Selenium), optimizando la incorporación de miles de nuevos usuarios mensualmente.",
+                "Reduje el tiempo de construcción de la UI de Activación en una nueva región de una semana a un proceso de 2 horas; resolví bugs de producción y problemas de rendimiento en guardia, siendo autor de 2 CAPAs para alta disponibilidad.",
+                "Colaboré con diseñadores UX y PMs en el diseño de funcionalidades, impulsando estándares de front-end y la gobernanza del sistema de diseño (Redwood) mientras cumplía plazos de lanzamiento agresivos."
             ],
             "skills": [
                 "Typescript",
                 "React",
                 "Redux",
+                "Jest",
                 "React Testing Library",
+                "Cypress",
+                "Playwright",
+                "Selenium",
                 "A11y",
                 "Figma",
                 "DevOps",
-                "Selenium",
                 "BrowserStack",
                 "TeamCity",
                 "Postman",
-                "Tweak",
                 "Oracle Cloud Infrastructure",
                 "Terraform"
             ]
@@ -67,9 +70,9 @@
             "endDate": "2018-12-01",
             "description": "Equipo financiero de AWS Marketplace responsable de pagos y retenciones de impuestos.",
             "bullets": [
-                "Reduje el tiempo de procesamiento de 1 día a minutos para generar el pipeline de informes fiscales 1099-K, mejoré la consulta SQL e integré el trabajo en CRON para entregarlo automáticamente a las partes interesadas.",
-                "Mejoré la escalabilidad y reduje costos al migrar servicios de un monolito a sistemas distribuidos con S3, Queues, Step Functions, lambdas y consultas SQL mejoradas.",
-                "Construí herramientas de pruebas de aceptación y estrés para aumentar la resiliencia operativa.",
+                "Construí y automaticé el pipeline de informes fiscales 1099-K de AWS Marketplace — generación de informes cifrados en S3 sobre el sublibro del vendedor — reduciendo el procesamiento de 1 día a minutos.",
+                "Migré el procesamiento de facturas de un monolito a arquitectura serverless (Lambda, S3, orquestación de flujos de trabajo), integrando paquetes dedicados de pruebas de carga (TPSGenerator) al pipeline de despliegue como compuertas de aprobación.",
+                "Contribuí al lanzamiento de AWS Marketplace SaaS Contracts: implementé el flujo Create SaaS Contract con pruebas de integración, y fui autor del diseño de la API CreateContract y del plan de pruebas de extremo a extremo.",
                 "Tomé la responsabilidad de mis rotaciones de OnCall con rollbacks rápidos y análisis de causa raíz, autor de 1 COE."
             ],
             "skills": [
@@ -77,6 +80,7 @@
                 "Spring Boot",
                 "AWS Lambda",
                 "Step Functions",
+                "S3",
                 "Hibernate",
                 "CI/CD",
                 "CloudWatch",
@@ -162,28 +166,31 @@
    "en": {
      "jobs": [
         {
-            "title": "Front End Engineer II",
+            "title": "Software Development Engineer",
             "company": "Amazon Leo (through INSPYR Solutions)",
             "location": "Redmond, WA (US)",
             "startDate": "2026-03-31",
             "endDate": null,
-            "description": "Front-end engineer working for Amazon Leo (formerly Amazon Kuiper) as a contractor for INSPYR Solutions.",
+            "description": "Front-end + full-stack on a real-time operational monitoring platform — React/Next.js over Node BFF services and a ClickHouse-backed telemetry data layer.",
             "bullets": [
-                "Spec driven development with Kiro",
-                "React and RTL for Satellite Health Dashboards",
-                "Updating Next JS pages migrating to Lambdas from AppSync",
-                "AI driven development using tools like Kiro, Claude Code, Amazon Q, and other internal tools with AWS Bedrock models to speed up development.",
-                "Skill development to keep repositories up to date with best practices and continuously improve code quality and maintainability."
+                "One of the team's most prolific shippers — 166 production changes at a ~98% merge rate across 5 packages in ~6 months, spanning design, implementation, and end-to-end tests.",
+                "Designed and built hardened Node BFF services — input-validated query builders, sanitized error responses, namespace-scoped fetching over a ClickHouse telemetry store — unifying six operational data sources behind one API surface.",
+                "Founded a shared TypeScript component library from scratch and migrated the flagship app onto it, ending duplicated UI across dashboards (SDK-free client/server/test-utils entry points, structural DTO seams, frozen test-id contract).",
+                "Became the team's standards owner — sole author of the ~400-line engineering standard plus per-package contributor guides (API/BFF conventions, tests-in-same-commit doctrine, deterministic e2e patterns, AI-agent rules distilled from production bug retros).",
+                "A trusted reviewer across the team (170+ changes from 20 engineers) who repeatedly caught what automated reviewers missed — a URL-allowlist security bypass, cross-tenant data fetches, coverage-accounting gaps — while keeping merges unblocked via fast-follow tickets.",
+                "Cut the end-to-end suite's runtime ~60% (11 → 4–5 min) by parallelizing it and grew coverage to 130+ end-to-end cases; the merge gate holds 5,000+ unit tests green.",
+                "Built the team's AI-assisted development workflow (MCP integrations for Jira/Slack/internal services plus a layered agent-rules system) that lets AI agents produce review-ready changes."
             ],
             "skills": [
                 "Typescript",
                 "React",
-                "Redux",
+                "Next.js",
+                "Node.js / BFF",
+                "ClickHouse",
                 "React Testing Library",
-                "Kiro",
-                "Spec Driven Development",
-                "AI Driven Development",
                 "Cypress",
+                "Playwright",
+                "AI-Assisted Development (MCP)",
                 "AWS"
             ]
         },
@@ -195,26 +202,26 @@
             "endDate": "2025-09-30",
             "description": "Front-end–focused engineer on Oracle Cloud Infrastructure (OCI).",
             "bullets": [
-                "Impacted the position of OCI in Garner to go from Niche to Leaders in Cloud by co-leading the expansion of the Marketplace Service, building React reusable components that were later expanded to Service Catalog which improved Garner ranking.",
-                "Increased test coverage by 60% for OCI Sign-Up & Account Activation portals in React/Redux, and streamlined onboarding for thousands of new users monthly.",
-                "Reduced building Activation UI in a new region from a week to a 2 hour process.",
-                "Rolled out Activation UI across 30+ private cloud deployments, ensuring design consistency (Redwood), accessibility, and expanded test coverage.",
-                "Delivered UI features on critical Service Catalog, Governance, and UI modernization projects, helping teams hit aggressive launch deadlines.",
-                "Owned OnCall rotations for both UI and the Backend services consumed. Authored 2 CAPAs."
+                "Shipped reusable TypeScript/React UI components for OCI Marketplace, Service Catalog, and Activation UIs deployed across 30+ cloud regions, co-leading the Marketplace Service expansion that moved OCI from Niche to Leaders in Gartner's Cloud ranking.",
+                "Increased test coverage by 60% for OCI Sign-Up & Account Activation portals with comprehensive unit, integration, and E2E suites (Jest, React Testing Library, Cypress, Playwright, Selenium), streamlining onboarding for thousands of new users monthly.",
+                "Reduced region Activation UI build time from 1 week to a 2-hour process; resolved production bugs and performance issues on-call, authoring 2 CAPAs for high availability.",
+                "Collaborated with UX designers and PMs on feature design, driving front-end standards and design-system (Redwood) governance while hitting aggressive launch deadlines."
             ],
             "skills": [
                 "Typescript",
                 "React",
                 "Redux",
+                "Jest",
                 "React Testing Library",
+                "Cypress",
+                "Playwright",
+                "Selenium",
                 "A11y",
                 "Figma",
                 "DevOps",
-                "Selenium",
                 "BrowserStack",
                 "TeamCity",
                 "Postman",
-                "Tweak",
                 "Oracle Cloud Infrastructure",
                 "Terraform"
             ]
@@ -227,9 +234,9 @@
             "endDate": "2018-12-01",
             "description": "AWS Marketplace finance team responsible for payments and tax withholdings.",
             "bullets": [
-                "Cut the processing time from 1 day to minutes to generate 1099-K tax reporting pipeline, improved the SQL query and integrated to CRON job to deliver automatically to stakeholders.",
-                "Improved scalability and reduced costs by migrating services from a monolith to distributed systems with S3, queues, Step Functions, lambdas and improved SQL queries.",
-                "Built acceptance & stress testing tools to boost operational resilience",
+                "Built and automated AWS Marketplace's 1099-K tax reporting pipeline — encrypted S3 report generation over the seller subledger — cutting processing from 1 day to minutes.",
+                "Migrated invoice processing from a monolith to serverless (Lambda, S3, workflow orchestration), wiring dedicated load-test packages (TPSGenerator) into the deployment pipeline as approval gates.",
+                "Contributed to the launch build-out of AWS Marketplace SaaS Contracts: implemented the Create SaaS Contract flow with integration tests, and authored the CreateContract API design and end-to-end test plan.",
                 "Owned on-call rotations with rapid rollback and root-cause analysis, authored 1 COE."
             ],
             "skills": [
@@ -237,6 +244,7 @@
                 "Spring Boot",
                 "AWS Lambda",
                 "Step Functions",
+                "S3",
                 "Hibernate",
                 "CI/CD",
                 "CloudWatch",
