@@ -3,27 +3,27 @@
     {
       "name": "Frontend",
       "nameEs": "Frontend",
-      "skills": ["React", "TypeScript", "Redux", "Next.js", "RTL", "Cypress", "A11y"]
+      "skills": ["React", "TypeScript", "Next.js", "Redux", "Jotai", "SWR", "RTL", "Cypress", "Playwright", "A11y"]
     },
     {
       "name": "Backend",
       "nameEs": "Backend",
-      "skills": ["Java", "Spring Boot", "Node.js", "Python", "AWS Lambda"]
+      "skills": ["Node.js / BFF", "Java", "Spring Boot", "Python", "AWS Lambda", "REST", "GraphQL", "ClickHouse"]
     },
     {
       "name": "AI",
       "nameEs": "IA",
-      "skills": ["Kiro", "Claude Code", "Amazon Q", "AWS Bedrock", "Spec Driven Dev", "Prompt Engineering"]
+      "skills": ["Kiro", "Claude Code", "Amazon Q", "AWS Bedrock", "MCP", "Agent Rules", "Spec Driven Dev"]
     },
     {
       "name": "Cloud & Infra",
       "nameEs": "Nube e Infra",
-      "skills": ["AWS", "S3/CloudFront", "Terraform", "Step Functions", "Docker", "CI/CD"]
+      "skills": ["AWS", "S3/CloudFront", "DynamoDB", "Terraform", "Step Functions", "Docker", "CI/CD"]
     },
     {
-      "name": "Tools",
-      "nameEs": "Herramientas",
-      "skills": ["Git", "Linux", "Figma", "TeamCity", "Postman"]
+      "name": "Testing & Tools",
+      "nameEs": "Pruebas y Herramientas",
+      "skills": ["Jest", "Vitest", "Selenium", "Git", "Figma", "TeamCity", "Jira", "Postman"]
     }
   ]
 }

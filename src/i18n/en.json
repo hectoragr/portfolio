@@ -1,7 +1,7 @@
 {
     "home": {
         "title": "Home",
-        "bio": "Software Engineer with experience building production systems at Oracle Cloud Infrastructure, Amazon Web Services, and Intel. I specialize in React, TypeScript, and cloud infrastructure — turning complex requirements into reliable, maintainable software.",
+        "bio": "Software Development Engineer with 8+ years shipping production software across Amazon, Oracle, and AWS — front-end depth (TypeScript, React, Next.js) plus full-stack range: Node/BFF services and AWS serverless data pipelines. I found shared component libraries, author team engineering standards, and build AI-agent development workflows that measurably accelerate delivery.",
         "aboutTitle": "About Me",
         "skillsTitle": "Skills",
         "experienceTitle": "Experience"
@@ -28,7 +28,7 @@
     },
     "resume": {
         "pronouns": "He/Him",
-        "softwareEngineer": "Software Engineer",
+        "softwareEngineer": "Software Development Engineer",
         "fulldetailstext": "Full details:",
         "workexptitle": "Work Experience",
         "educationtitle": "Education",

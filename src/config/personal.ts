@@ -1,6 +1,6 @@
 export const PERSONAL = {
   name: 'Héctor A. Gómez',
-  title: 'Software Engineer',
+  title: 'Software Development Engineer',
   location: 'Seattle, WA',
   email: 'hector.agr@gmail.com',
   linkedin: 'https://www.linkedin.com/in/hagomezr',
